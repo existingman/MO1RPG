@@ -1,0 +1,5 @@
+C:\Users\Laurence\Documents\MO1Git\VSsolution\Common\bin\Debug\MO1Common.dll
+C:\Users\Laurence\Documents\MO1Git\VSsolution\Common\bin\Debug\MO1Common.pdb
+C:\Users\Laurence\Documents\MO1Git\VSsolution\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Users\Laurence\Documents\MO1Git\VSsolution\Common\obj\Debug\MO1Common.dll
+C:\Users\Laurence\Documents\MO1Git\VSsolution\Common\obj\Debug\MO1Common.pdb

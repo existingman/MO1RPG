@@ -1,0 +1,5 @@
+C:\Users\Laurence\Documents\MasterOfOne\Assets\Scripts\MO1VSSolution\MO1Common\bin\Debug\MO1Common.dll
+C:\Users\Laurence\Documents\MasterOfOne\Assets\Scripts\MO1VSSolution\MO1Common\bin\Debug\MO1Common.pdb
+C:\Users\Laurence\Documents\MasterOfOne\Assets\Scripts\MO1VSSolution\MO1Common\obj\Debug\MO1Common.csprojResolveAssemblyReference.cache
+C:\Users\Laurence\Documents\MasterOfOne\Assets\Scripts\MO1VSSolution\MO1Common\obj\Debug\MO1Common.dll
+C:\Users\Laurence\Documents\MasterOfOne\Assets\Scripts\MO1VSSolution\MO1Common\obj\Debug\MO1Common.pdb
