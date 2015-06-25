@@ -7,43 +7,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MO1VSSolution.Definitions;
-using MO1VSSolution.Editor;
+using MO1.Definitions;
+using MO1.Editor;
 
 namespace Editor
 {
     public partial class TerrainEditor : Form
     {
-        PictureBox[,] board = new PictureBox[5, 5];
+        ImageList _list;
         public TerrainEditor()
         {
             InitializeComponent();
-            for (int x = 0; x < 10; x++)
+            _list = new ImageList(5, 5, ImageData.Images[ImageType.terrains], new Point(290, 0), this);
+            _list.UserInput += ImageInput;
+            textBox1.TextChanged += textBox1_TextChanged;
+            if (Data.Terrains.Count > 1)
             {
-                for (int y = 0; y < 10; y++)
-                {
-                    board[x, y] = new PictureBox();
-                    ((System.ComponentModel.ISupportInitialize)(board[x, y])).BeginInit();
-                    board[x, y].Image = global::Editor.Properties.Resources.wall;
-                    board[x, y].Margin = new System.Windows.Forms.Padding(0);
-                    board[x, y].Name = "picturebox" + x.ToString() + "," + y.ToString();
-                    board[x, y].Size = new System.Drawing.Size(50, 50);
-                    board[x, y].Location = new Point(x * 50, y * 50);
-                    this.panel.Controls.Add(board[x, y]);
-                }
+                hScrollBar1.Maximum = Data.Terrains.Count - 1;
             }
+            else
+            {
+                hScrollBar1.Enabled = false;
+            }
+            comboBox1.DataSource = Enum.GetNames(typeof(TerrainType));
+            this.ShowDialog();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        void textBox1_TextChanged(object sender, EventArgs e)
         {
+            Data.Terrains[hScrollBar1.Value].name = textBox1.Text;
+        }
 
+        public void ImageInput(int iRef, ImageList il)
+        {
+            Data.Terrains[hScrollBar1.Value].Image = iRef;
+            pictureBox1.Image = MO1.Editor.ImageData.Images[ImageType.terrains][iRef];
         }
 
         private void Add_Click(object sender, EventArgs e)
         {
             Data.Terrains.Add(new Terrain());
-            hScrollBar1.Maximum = Data.Terrains.Count;
-            hScrollBar1.Value = Data.Terrains.Count;
+            hScrollBar1.Maximum = Data.Terrains.Count -1;
+            hScrollBar1.Value = Data.Terrains.Count - 1;
+            hScrollBar1.Enabled = true;
+            textBox1.Text = "no name";
 
         }
 
@@ -51,12 +58,18 @@ namespace Editor
         {
             textBox2.Text = hScrollBar1.Value.ToString();
             textBox1.Text = Data.Terrains[hScrollBar1.Value].name;
+            pictureBox1.Image = MO1.Editor.ImageData.Images[ImageType.terrains][Data.Terrains[hScrollBar1.Value].Image];
+            comboBox1.SelectedIndex = (int)Data.Terrains[hScrollBar1.Value].Type;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //switch(comboBox1.SelectedIndex)
-            //Data.Terrains[hScrollBar1.Value].Type = comboBox1.SelectedIndex
+            Data.Terrains[hScrollBar1.Value].Type = (TerrainType)comboBox1.SelectedIndex;
+        }
+
+        private void TerrainEditor_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -40,10 +40,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Definitions\Entity.cs" />
+    <Compile Include="Definitions\IThing.cs" />
     <Compile Include="Definitions\Prop.cs" />
     <Compile Include="Definitions\Terrain.cs" />
     <Compile Include="Definitions\Tile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tech\Tech.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Definitions\Entities\" />

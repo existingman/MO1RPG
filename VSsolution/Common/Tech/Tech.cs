@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MO1VSSolution.Tech
+namespace MO1.Tech
 {
     public struct Coord
     {

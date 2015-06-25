@@ -39,8 +39,6 @@
             this.Delete = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
-            this.panel = new System.Windows.Forms.Panel();
             this.textBox2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -80,7 +78,6 @@
             this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Type";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -149,22 +146,6 @@
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
-            // vScrollBar1
-            // 
-            this.vScrollBar1.LargeChange = 1;
-            this.vScrollBar1.Location = new System.Drawing.Point(274, 3);
-            this.vScrollBar1.Maximum = 0;
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 250);
-            this.vScrollBar1.TabIndex = 11;
-            // 
-            // panel
-            // 
-            this.panel.Location = new System.Drawing.Point(295, 3);
-            this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(252, 250);
-            this.panel.TabIndex = 12;
-            // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(221, 3);
@@ -176,10 +157,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 262);
+            this.ClientSize = new System.Drawing.Size(571, 274);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.panel);
-            this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.Delete);
@@ -193,6 +172,7 @@
             this.Controls.Add(this.Add);
             this.Name = "TerrainEditor";
             this.Text = "TerrainEditor";
+            this.Load += new System.EventHandler(this.TerrainEditor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -212,8 +192,6 @@
         private System.Windows.Forms.Button Delete;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.VScrollBar vScrollBar1;
-        private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.TextBox textBox2;
     }
 }

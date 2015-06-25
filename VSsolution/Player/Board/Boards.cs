@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using MO1VSSolution.Content;
-using MO1VSSolution.Definitions.Tiles;
+using MO1.Content;
+using MO1.Definitions.Tiles;
 
-namespace MO1VSSolution.Boards
+namespace MO1.Boards
 {
     public static class Board
     {

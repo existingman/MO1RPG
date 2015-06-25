@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
 using System.IO;
+using MO1.Definitions;
 
-namespace MO1VSSolution.Editor
+namespace MO1.Editor
 {
-    public enum ImageType { terrains, props, entities, items };
 
     public static class ImageData
     {

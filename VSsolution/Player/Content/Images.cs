@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MO1VSSolution.Content
+namespace MO1.Content
 {
     public static class Images
     {

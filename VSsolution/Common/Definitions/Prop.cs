@@ -1,19 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using MO1VSSolution.Definitions;
+using MO1.Definitions;
 
 
 
-namespace MO1VSSolution.Definitions
+namespace MO1.Definitions
 {
-    public class Prop
+    public enum PropType { decoration, obstruction, door, window, container, pile, lever}
+    public class Prop : IThing
     {
-        public Tile Owner;
-        public int Image;
+        public static List<String> DescriptionList = new List<string>();
+        public static List<String> StepOnList = new List<string>();
 
-        public virtual void Interaction()
+        //IThing stuff
+        public ImageType Type()
         {
-
+            return ImageType.props;
         }
+        public int DefaultImageRef()
+        {
+            return imageRef1;
+        }
+
+
+        //GenericStuff
+        public PropType proptype;
+        public string Name = "Unnamed";
+        public int imageRef1;
+        public int DescriptionRef;
+        public int StepOnRef;
+
+        //Individual stuff
+        public Tile Owner;
+
+
+        
     }
 }

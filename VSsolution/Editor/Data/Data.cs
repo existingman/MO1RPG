@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using MO1VSSolution.Definitions;
+using MO1.Definitions;
 
-namespace MO1VSSolution.Editor
+namespace MO1.Editor
 {
     public static class Data
     {
         //Object list declarations
         public static List<Terrain> Terrains = new List<Terrain>();
+        public static List<Prop> Props = new List<Prop>();
+        public static List<Entity> Entities = new List<Entity>();
+
+
 
         //Base Directory for saving and loading Data
         public static string BaseDir;
@@ -59,12 +63,47 @@ namespace MO1VSSolution.Editor
 
         public static void Save()
         {
-
+            string contentlist = Path.Combine(BaseDir, "content.txt");
+            if (File.Exists(contentlist))
+            {
+                File.Delete(contentlist);
+            }
+            using (StreamWriter sw = new StreamWriter(contentlist))
+            {
+                sw.WriteLine(Terrains.Count);
+                foreach (Terrain t in Terrains)
+                {
+                    sw.WriteLine(t.name);
+                    sw.WriteLine((int)(t.Type));
+                    sw.WriteLine(t.Image);
+                }
+            }
         }
 
         public static void Load()
         {
+            ImageData.LoadImages();
 
+            string contentlist = Path.Combine(BaseDir, "content.txt");
+            if (File.Exists(contentlist))
+            {
+                using (StreamReader sr = new StreamReader(contentlist))
+                {
+                    int count = Convert.ToInt32(sr.ReadLine());
+                    for (int c = 0; c < count; c++ )
+                    {
+                        Terrain t = new Terrain();
+                        t.name = sr.ReadLine();
+                        t.Type = (TerrainType)(Convert.ToInt32(sr.ReadLine()));
+                        t.Image = Convert.ToInt32(sr.ReadLine());
+                        Terrains.Add(t);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("content file not found");
+            }
         }
 
 

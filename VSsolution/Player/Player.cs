@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using MO1VSSolution.Tech;
-using MO1VSSolution.Definitions.Entities;
+using MO1.Tech;
+using MO1.Definitions.Entities;
 
-namespace MO1VSSolution
+namespace MO1
 {
     public static class Player
     {

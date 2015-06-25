@@ -46,13 +46,21 @@
             this.hScrollBar = new System.Windows.Forms.HScrollBar();
             this.vScrollBar = new System.Windows.Forms.VScrollBar();
             this.panel = new System.Windows.Forms.Panel();
-            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.TerrainTab = new System.Windows.Forms.TabPage();
+            this.PropTab = new System.Windows.Forms.TabPage();
+            this.EntityTab = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.MainMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zLevelControl)).BeginInit();
             this.tabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // MainMenuStrip
@@ -75,7 +83,8 @@
             // 
             this.File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Save,
-            this.Load});
+            this.Load,
+            this.newToolStripMenuItem});
             this.File.Name = "File";
             this.File.Size = new System.Drawing.Size(37, 20);
             this.File.Text = "File";
@@ -83,14 +92,14 @@
             // Save
             // 
             this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(100, 22);
+            this.Save.Size = new System.Drawing.Size(152, 22);
             this.Save.Text = "Save";
             this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // Load
             // 
             this.Load.Name = "Load";
-            this.Load.Size = new System.Drawing.Size(100, 22);
+            this.Load.Size = new System.Drawing.Size(152, 22);
             this.Load.Text = "Load";
             this.Load.Click += new System.EventHandler(this.Load_Click);
             // 
@@ -120,27 +129,27 @@
             // getImagesToolStripMenuItem
             // 
             this.getImagesToolStripMenuItem.Name = "getImagesToolStripMenuItem";
-            this.getImagesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.getImagesToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.getImagesToolStripMenuItem.Text = "Get Images";
             this.getImagesToolStripMenuItem.Click += new System.EventHandler(this.getImagesToolStripMenuItem_Click);
             // 
             // terrainEditorToolStripMenuItem
             // 
             this.terrainEditorToolStripMenuItem.Name = "terrainEditorToolStripMenuItem";
-            this.terrainEditorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.terrainEditorToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.terrainEditorToolStripMenuItem.Text = "Terrain Editor";
             this.terrainEditorToolStripMenuItem.Click += new System.EventHandler(this.terrainEditorToolStripMenuItem_Click);
             // 
             // propsEditorToolStripMenuItem
             // 
             this.propsEditorToolStripMenuItem.Name = "propsEditorToolStripMenuItem";
-            this.propsEditorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.propsEditorToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.propsEditorToolStripMenuItem.Text = "Props Editor";
             // 
             // entityEditorToolStripMenuItem
             // 
             this.entityEditorToolStripMenuItem.Name = "entityEditorToolStripMenuItem";
-            this.entityEditorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.entityEditorToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.entityEditorToolStripMenuItem.Text = "Entity Editor";
             // 
             // Tool
@@ -170,6 +179,7 @@
             this.zLevelControl.Name = "zLevelControl";
             this.zLevelControl.Size = new System.Drawing.Size(47, 20);
             this.zLevelControl.TabIndex = 8;
+            this.zLevelControl.ValueChanged += new System.EventHandler(this.zLevelControl_ValueChanged);
             // 
             // hScrollBar
             // 
@@ -177,6 +187,7 @@
             this.hScrollBar.Name = "hScrollBar";
             this.hScrollBar.Size = new System.Drawing.Size(720, 17);
             this.hScrollBar.TabIndex = 9;
+            this.hScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar_Scroll);
             // 
             // vScrollBar
             // 
@@ -184,6 +195,7 @@
             this.vScrollBar.Name = "vScrollBar";
             this.vScrollBar.Size = new System.Drawing.Size(17, 523);
             this.vScrollBar.TabIndex = 10;
+            this.vScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar_Scroll);
             // 
             // panel
             // 
@@ -193,51 +205,115 @@
             this.panel.TabIndex = 11;
             this.panel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel_MouseUp);
             // 
-            // hScrollBar1
-            // 
-            this.hScrollBar1.Location = new System.Drawing.Point(785, 191);
-            this.hScrollBar1.Name = "hScrollBar1";
-            this.hScrollBar1.Size = new System.Drawing.Size(381, 17);
-            this.hScrollBar1.TabIndex = 13;
-            // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.TerrainTab);
+            this.tabControl1.Controls.Add(this.PropTab);
+            this.tabControl1.Controls.Add(this.EntityTab);
             this.tabControl1.Location = new System.Drawing.Point(788, 54);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(378, 134);
+            this.tabControl1.Size = new System.Drawing.Size(378, 167);
             this.tabControl1.TabIndex = 14;
             // 
-            // tabPage1
+            // TerrainTab
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(370, 108);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            this.TerrainTab.Location = new System.Drawing.Point(4, 22);
+            this.TerrainTab.Name = "TerrainTab";
+            this.TerrainTab.Padding = new System.Windows.Forms.Padding(3);
+            this.TerrainTab.Size = new System.Drawing.Size(370, 141);
+            this.TerrainTab.TabIndex = 0;
+            this.TerrainTab.Text = "Terrains";
+            this.TerrainTab.UseVisualStyleBackColor = true;
+            this.TerrainTab.Click += new System.EventHandler(this.tabPage1_Click);
             // 
-            // tabPage2
+            // PropTab
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 74);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.PropTab.Location = new System.Drawing.Point(4, 22);
+            this.PropTab.Name = "PropTab";
+            this.PropTab.Padding = new System.Windows.Forms.Padding(3);
+            this.PropTab.Size = new System.Drawing.Size(370, 108);
+            this.PropTab.TabIndex = 1;
+            this.PropTab.Text = "Props";
+            this.PropTab.UseVisualStyleBackColor = true;
+            // 
+            // EntityTab
+            // 
+            this.EntityTab.Location = new System.Drawing.Point(4, 22);
+            this.EntityTab.Name = "EntityTab";
+            this.EntityTab.Size = new System.Drawing.Size(370, 108);
+            this.EntityTab.TabIndex = 2;
+            this.EntityTab.Text = "Entities";
+            this.EntityTab.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(788, 227);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(844, 223);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(48, 17);
+            this.radioButton1.TabIndex = 16;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Click";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(844, 246);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(37, 17);
+            this.radioButton2.TabIndex = 17;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Fill";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(844, 269);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(43, 17);
+            this.radioButton3.TabIndex = 18;
+            this.radioButton3.Text = "Box";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(788, 283);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox2.TabIndex = 19;
+            this.pictureBox2.TabStop = false;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1178, 603);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.radioButton3);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.hScrollBar1);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.vScrollBar);
             this.Controls.Add(this.hScrollBar);
@@ -250,6 +326,8 @@
             this.MainMenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zLevelControl)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,10 +353,16 @@
         private System.Windows.Forms.HScrollBar hScrollBar;
         private System.Windows.Forms.VScrollBar vScrollBar;
         private System.Windows.Forms.Panel panel;
-        private System.Windows.Forms.HScrollBar hScrollBar1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage TerrainTab;
+        private System.Windows.Forms.TabPage PropTab;
+        private System.Windows.Forms.TabPage EntityTab;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

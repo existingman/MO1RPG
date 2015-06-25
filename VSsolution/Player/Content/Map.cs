@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using MO1VSSolution.Definitions.Tiles;
+using MO1.Definitions.Tiles;
 
-namespace MO1VSSolution.Content
+namespace MO1.Content
 {
     public static class Map
     {
