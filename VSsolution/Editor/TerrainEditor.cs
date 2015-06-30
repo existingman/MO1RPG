@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MO1VSSolution.Definitions;
+using MO1VSSolution.Editor;
 
 namespace Editor
 {

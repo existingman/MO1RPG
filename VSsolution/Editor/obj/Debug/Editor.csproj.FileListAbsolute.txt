@@ -32,3 +32,15 @@ C:\Users\Laurence\Documents\MO1Git\VSsolution\Editor\bin\Debug\Editor.exe
 C:\Users\Laurence\Documents\MO1Git\VSsolution\Editor\bin\Debug\Editor.pdb
 C:\Users\Laurence\Documents\MO1Git\VSsolution\Editor\bin\Debug\MO1Common.dll
 C:\Users\Laurence\Documents\MO1Git\VSsolution\Editor\bin\Debug\MO1Common.pdb
+C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Editor\bin\Debug\Editor.exe.config
+C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Editor\obj\Debug\Editor.exe
+C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Editor\obj\Debug\Editor.pdb
+C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Editor\bin\Debug\Editor.exe
+C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Editor\bin\Debug\Editor.pdb
+C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Editor\bin\Debug\MO1Common.dll
+C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Editor\bin\Debug\MO1Common.pdb
+C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Editor\obj\Debug\Editor.csprojResolveAssemblyReference.cache
+C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Editor\obj\Debug\Editor.Main.resources
+C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Editor\obj\Debug\Editor.Properties.Resources.resources
+C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Editor\obj\Debug\Editor.TerrainEditor.resources
+C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Editor\obj\Debug\Editor.csproj.GenerateResource.Cache

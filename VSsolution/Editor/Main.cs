@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MO1VSSolution.Editor;
 
 namespace Editor
 {
@@ -45,15 +46,20 @@ namespace Editor
 
         private void Load_Click(object sender, EventArgs e)
         {
-            Data.Load();
+            //Data.Load();
+            ImageData.LoadImages();
+            for (int i = 0; i < ImageData.Images[ImageType.terrains].Count; i++)
+            {
+                if (i < 10) board[i, 0].Image = ImageData.Images[ImageType.terrains][i];
+            }
         }
 
         private void getImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Data.GetImages();
-            for(int i = 0; i < Data.Images[Data.ImageType.terrains].Count; i++)
+            ImageData.Get();
+            for (int i = 0; i < ImageData.Images[ImageType.terrains].Count; i++)
             {
-                board[i, 1].Image = Data.Images[Data.ImageType.terrains][i];
+                if(i < 10) board[i, 1].Image = ImageData.Images[ImageType.terrains][i];
             }
         }
 
