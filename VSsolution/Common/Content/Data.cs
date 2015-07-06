@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using MO1.Definitions;
 
-namespace MO1.Editor
+namespace MO1.Content
 {
     public static class Data
     {
@@ -70,33 +70,79 @@ namespace MO1.Editor
             }
             using (StreamWriter sw = new StreamWriter(contentlist))
             {
+                //Run through each of the lists of game elements and save all of their references to disk
+                //Terrains
                 sw.WriteLine(Terrains.Count);
                 foreach (Terrain t in Terrains)
                 {
-                    sw.WriteLine(t.name);
-                    sw.WriteLine((int)(t.Type));
-                    sw.WriteLine(t.Image);
+                    sw.WriteLine(t.Name);
+                    sw.WriteLine((int)(t.TerrainType));
+                    sw.WriteLine(t.imageRef1);
+                    sw.WriteLine(t.imageRef2);
                 }
+
+                //props
+                sw.WriteLine(Props.Count);
+                foreach (Prop p in Props)
+                {
+                    sw.WriteLine(p.Name);
+                    sw.WriteLine((int)(p.proptype));
+                    sw.WriteLine(p.imageRef1);
+                    sw.WriteLine(p.imageRef2);
+                    sw.WriteLine(p.DescriptionRef);
+                }
+
+                //entities
+                sw.WriteLine(Entities.Count);
+                foreach (Entity e in Entities)
+                {
+                    sw.WriteLine(e.Name);
+                    sw.WriteLine(e.imageRef1);
+                }
+
             }
         }
 
         public static void Load()
         {
-            ImageData.LoadImages();
-
             string contentlist = Path.Combine(BaseDir, "content.txt");
             if (File.Exists(contentlist))
             {
                 using (StreamReader sr = new StreamReader(contentlist))
                 {
+                    //runs through each of the lists of game elements and fills it from the disk
+                    //terrains
                     int count = Convert.ToInt32(sr.ReadLine());
                     for (int c = 0; c < count; c++ )
                     {
                         Terrain t = new Terrain();
-                        t.name = sr.ReadLine();
-                        t.Type = (TerrainType)(Convert.ToInt32(sr.ReadLine()));
-                        t.Image = Convert.ToInt32(sr.ReadLine());
+                        t.Name = sr.ReadLine();
+                        t.TerrainType = (TerrainType)(Convert.ToInt32(sr.ReadLine()));
+                        t.imageRef1 = Convert.ToInt32(sr.ReadLine());
+                        t.imageRef2 = Convert.ToInt32(sr.ReadLine());
                         Terrains.Add(t);
+                    }
+
+                    //props
+                    count = Convert.ToInt32(sr.ReadLine());
+                    for (int c = 0; c < count; c++)
+                    {
+                        Prop p = new Prop();
+                        p.Name = sr.ReadLine();
+                        p.proptype = (PropType)(Convert.ToInt32(sr.ReadLine()));
+                        p.imageRef1 = Convert.ToInt32(sr.ReadLine());
+                        p.imageRef2 = Convert.ToInt32(sr.ReadLine());
+                        p.DescriptionRef = Convert.ToInt32(sr.ReadLine());
+                        Props.Add(p);
+                    }
+                    //entities
+                    count = Convert.ToInt32(sr.ReadLine());
+                    for (int c = 0; c < count; c++)
+                    {
+                        Entity e = new Entity();
+                        e.Name = sr.ReadLine();
+                        e.imageRef1 = Convert.ToInt32(sr.ReadLine());
+                        Entities.Add(e);
                     }
                 }
             }

@@ -16,11 +16,16 @@ namespace MO1.Definitions
         {
             return ImageType.terrains;
         }
-        public int DefaultImageRef();
+        public int DefaultImageRef()
+        {
+            return imageRef1;
+        }
 
         //Generic Stuff
         public TerrainType TerrainType = TerrainType.Floor;
         public string Name = "Unnamed";
+        public int imageRef1;
+        public int imageRef2;
 
         //individual stuff
         public Tile Owner;

@@ -7,11 +7,20 @@ namespace MO1.Definitions
 {
     public class Tile
     {
-        public bool LineOfSight;
-        public bool Discovered;
+        public int PropRef = -1;
+        public int TerrainRef = -1;
+        public int EntityRef = -1;
 
-        public Prop Prop;
-        public Terrain Terrain;
-        public Entity Entity;
+        //terrain State
+        public bool LineOfSight = false;
+        public bool Discovered = false;
+        public bool Traversed = false;
+
+        //Prop state
+        public DoorState DoorState;
+        public int KeyRef;
+        public int ActionRef;
+
+
     }
 }

@@ -45,7 +45,6 @@
     <Compile Include="Board\Boards.cs" />
     <Compile Include="Board\TileDisplay.cs" />
     <Compile Include="Content\Images.cs" />
-    <Compile Include="Content\Map.cs" />
     <Compile Include="MainControl.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MO1.Editor;
 using MO1.Definitions;
 using MO1.Tech;
+using MO1.Content;
 
 namespace Editor
 {
@@ -45,7 +46,7 @@ namespace Editor
             List<Image> temp = new List<Image>();
             foreach(Terrain t in Data.Terrains)
             {
-                temp.Add(ImageData.Images[ImageType.terrains][t.Image]);
+                temp.Add(ImageData.Images[ImageType.terrains][t.imageRef1]);
             }
             TerrainList = new ImageList(7, 2, temp, new Point(0, 0), this.tabControl1.TabPages[0]);
             TerrainList.UserInput += select;
@@ -53,7 +54,7 @@ namespace Editor
             temp = new List<Image>();
             foreach (Prop p in Data.Props)
             {
-                temp.Add(ImageData.Images[ImageType.props][p.Image]);
+                temp.Add(ImageData.Images[ImageType.props][p.imageRef1]);
             }
             PropList = new ImageList(7, 2, temp, new Point(0, 0), this.tabControl1.TabPages[1]);
             PropList.UserInput += select;
@@ -61,7 +62,7 @@ namespace Editor
             temp = new List<Image>();
             foreach (Entity e in Data.Entities)
             {
-                temp.Add(ImageData.Images[ImageType.entities][e.Image]);
+                temp.Add(ImageData.Images[ImageType.entities][e.imageRef1]);
             }
             EntityList = new ImageList(7, 2, temp, new Point(0, 0), this.tabControl1.TabPages[2]);
             EntityList.UserInput += select;
@@ -133,17 +134,17 @@ namespace Editor
             if (l.Equals(TerrainList))
             {
                 seltype = ImageType.terrains;
-                pictureBox1.Image = ImageData.Images[seltype][Data.Terrains[objectRef].Image];
+                pictureBox1.Image = ImageData.Images[seltype][Data.Terrains[objectRef].imageRef1];
             }
             if (l.Equals(PropList))
             {
                 seltype = ImageType.props;
-                pictureBox1.Image = ImageData.Images[seltype][Data.Props[objectRef].Image];
+                pictureBox1.Image = ImageData.Images[seltype][Data.Props[objectRef].imageRef1];
             }
             if (l.Equals(EntityList))
             {
                 seltype = ImageType.entities;
-                pictureBox1.Image = ImageData.Images[seltype][Data.Entities[objectRef].Image];
+                pictureBox1.Image = ImageData.Images[seltype][Data.Entities[objectRef].imageRef1];
             }
         }
 
@@ -157,7 +158,7 @@ namespace Editor
             int zTarg = (int)zLevelControl.Value;
             if (radioButton1.Checked)
             {
-                MapData.Apply(seltype, objectRef, xTarg, yTarg, zTarg);
+                Map.Apply(seltype, objectRef, xTarg, yTarg, zTarg);
             }
 
             if (radioButton2.Checked || radioButton3.Checked)
@@ -171,7 +172,7 @@ namespace Editor
                         { 
                             for (int z = Math.Min(FirstCoord.Z, seccondCoord.Z); z <= Math.Max(FirstCoord.Z, seccondCoord.Z); z++)
                             {
-                                MapData.Apply(seltype, objectRef, x, y, z);
+                                Map.Apply(seltype, objectRef, x, y, z);
                             }
                         }
                     }
@@ -181,16 +182,16 @@ namespace Editor
                         {
                             for (int z = Math.Min(FirstCoord.Z, seccondCoord.Z); z <= Math.Max(FirstCoord.Z, seccondCoord.Z); z++)
                             {
-                                MapData.Apply(seltype, objectRef2, x, FirstCoord.Y, z);
-                                MapData.Apply(seltype, objectRef2, x, seccondCoord.Y, z);
+                                Map.Apply(seltype, objectRef2, x, FirstCoord.Y, z);
+                                Map.Apply(seltype, objectRef2, x, seccondCoord.Y, z);
                             } 
                         }
                         for (int y = Math.Min(FirstCoord.Y, seccondCoord.Y); y <= Math.Max(FirstCoord.Y, seccondCoord.Y); y++)
                         {
                             for (int z = Math.Min(FirstCoord.Z, seccondCoord.Z); z <= Math.Max(FirstCoord.Z, seccondCoord.Z); z++)
                             {
-                                MapData.Apply(seltype, objectRef2, FirstCoord.X, y, z);
-                                MapData.Apply(seltype, objectRef2, seccondCoord.X, y, z);
+                                Map.Apply(seltype, objectRef2, FirstCoord.X, y, z);
+                                Map.Apply(seltype, objectRef2, seccondCoord.X, y, z);
                             }
                         }
                     }
@@ -209,10 +210,10 @@ namespace Editor
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MapData.Intialise();
-            vScrollBar.Maximum = MapData.XSize - boardSize - 1;
-            hScrollBar.Maximum = MapData.YSize - boardSize - 1;
-            zLevelControl.Maximum = MapData.ZSize - 1;
+            //Map.Intialise();
+            vScrollBar.Maximum = Map.XSize - boardSize - 1;
+            hScrollBar.Maximum = Map.YSize - boardSize - 1;
+            zLevelControl.Maximum = Map.ZSize - 1;
         }
 
         public void Refresh()
@@ -221,7 +222,15 @@ namespace Editor
             {
                 for (int y = 0; y < boardSize; y++)
                 {
-                    board[x, y].Image = ImageData.Images[ImageType.terrains][Data.Terrains[MapData.TerrainMap[hScrollBar.Value + x, vScrollBar.Value + y, (int)zLevelControl.Value]].Image];
+                    Tile temp =  Map.Tile[hScrollBar.Value + x, vScrollBar.Value + y, (int)zLevelControl.Value];
+                    if(temp.TerrainRef == -1)
+                    {
+                        board[x, y].Image = null;
+                    }
+                    else
+                    {
+                        board[x, y].Image = ImageData.Images[ImageType.terrains][Data.Terrains[temp.TerrainRef].imageRef1];
+                    }
                 }
             }
         }

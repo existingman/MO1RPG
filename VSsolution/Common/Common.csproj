@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Content\Data.cs" />
+    <Compile Include="Content\Map.cs" />
+    <Compile Include="Definitions\Action.cs" />
     <Compile Include="Definitions\Entity.cs" />
     <Compile Include="Definitions\IThing.cs" />
     <Compile Include="Definitions\Prop.cs" />

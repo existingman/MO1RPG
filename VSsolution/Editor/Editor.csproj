@@ -44,8 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\MapData.cs" />
-    <Compile Include="Data\Data.cs" />
     <Compile Include="Data\ImageData.cs" />
     <Compile Include="ImageList.cs" />
     <Compile Include="Main.cs">

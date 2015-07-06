@@ -6,11 +6,11 @@ using MO1.Definitions;
 
 namespace MO1.Definitions
 {
-    public enum PropType { decoration, obstruction, door, window, container, pile, lever}
+    public enum PropType { none, decoration, obstruction, door, window, container, pile, lever}
+    public enum DoorState { none, lockedOpen, lockedClosed, open, closed }
     public class Prop : IThing
     {
         public static List<String> DescriptionList = new List<string>();
-        public static List<String> StepOnList = new List<string>();
 
         //IThing stuff
         public ImageType Type()
@@ -27,8 +27,8 @@ namespace MO1.Definitions
         public PropType proptype;
         public string Name = "Unnamed";
         public int imageRef1;
+        public int imageRef2;
         public int DescriptionRef;
-        public int StepOnRef;
 
         //Individual stuff
         public Tile Owner;

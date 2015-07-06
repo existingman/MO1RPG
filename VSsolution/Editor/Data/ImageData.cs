@@ -5,7 +5,7 @@ using System.Drawing;
 using System.IO;
 using MO1.Definitions;
 
-namespace MO1.Editor
+namespace MO1.Content
 {
 
     public static class ImageData
