@@ -1,4 +1,4 @@
-﻿namespace Editor
+﻿namespace MO1.Editor
 {
     partial class TerrainEditor
     {

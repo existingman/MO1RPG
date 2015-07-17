@@ -1,4 +1,4 @@
-﻿namespace Editor
+﻿namespace MO1.Editor
 {
     partial class Main
     {
@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.File = new System.Windows.Forms.ToolStripMenuItem();
             this.Save = new System.Windows.Forms.ToolStripMenuItem();
             this.Load = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Edit = new System.Windows.Forms.ToolStripMenuItem();
             this.View = new System.Windows.Forms.ToolStripMenuItem();
             this.DataEntry = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,28 +41,31 @@
             this.terrainEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.propsEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entityEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.playerEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dialogueEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tool = new System.Windows.Forms.ToolStripMenuItem();
             this.Help = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.zLevelControl = new System.Windows.Forms.NumericUpDown();
-            this.hScrollBar = new System.Windows.Forms.HScrollBar();
-            this.vScrollBar = new System.Windows.Forms.VScrollBar();
             this.panel = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TerrainTab = new System.Windows.Forms.TabPage();
             this.PropTab = new System.Windows.Forms.TabPage();
             this.EntityTab = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.MainMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zLevelControl)).BeginInit();
             this.tabControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // MainMenuStrip
@@ -92,16 +97,23 @@
             // Save
             // 
             this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(152, 22);
+            this.Save.Size = new System.Drawing.Size(100, 22);
             this.Save.Text = "Save";
             this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // Load
             // 
             this.Load.Name = "Load";
-            this.Load.Size = new System.Drawing.Size(152, 22);
+            this.Load.Size = new System.Drawing.Size(100, 22);
             this.Load.Text = "Load";
             this.Load.Click += new System.EventHandler(this.Load_Click);
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // Edit
             // 
@@ -121,7 +133,9 @@
             this.getImagesToolStripMenuItem,
             this.terrainEditorToolStripMenuItem,
             this.propsEditorToolStripMenuItem,
-            this.entityEditorToolStripMenuItem});
+            this.entityEditorToolStripMenuItem,
+            this.playerEditorToolStripMenuItem,
+            this.dialogueEditorToolStripMenuItem});
             this.DataEntry.Name = "DataEntry";
             this.DataEntry.Size = new System.Drawing.Size(73, 20);
             this.DataEntry.Text = "Data Entry";
@@ -129,28 +143,43 @@
             // getImagesToolStripMenuItem
             // 
             this.getImagesToolStripMenuItem.Name = "getImagesToolStripMenuItem";
-            this.getImagesToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.getImagesToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.getImagesToolStripMenuItem.Text = "Get Images";
             this.getImagesToolStripMenuItem.Click += new System.EventHandler(this.getImagesToolStripMenuItem_Click);
             // 
             // terrainEditorToolStripMenuItem
             // 
             this.terrainEditorToolStripMenuItem.Name = "terrainEditorToolStripMenuItem";
-            this.terrainEditorToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.terrainEditorToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.terrainEditorToolStripMenuItem.Text = "Terrain Editor";
             this.terrainEditorToolStripMenuItem.Click += new System.EventHandler(this.terrainEditorToolStripMenuItem_Click);
             // 
             // propsEditorToolStripMenuItem
             // 
             this.propsEditorToolStripMenuItem.Name = "propsEditorToolStripMenuItem";
-            this.propsEditorToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.propsEditorToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.propsEditorToolStripMenuItem.Text = "Props Editor";
+            this.propsEditorToolStripMenuItem.Click += new System.EventHandler(this.propsEditorToolStripMenuItem_Click);
             // 
             // entityEditorToolStripMenuItem
             // 
             this.entityEditorToolStripMenuItem.Name = "entityEditorToolStripMenuItem";
-            this.entityEditorToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.entityEditorToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.entityEditorToolStripMenuItem.Text = "Entity Editor";
+            this.entityEditorToolStripMenuItem.Click += new System.EventHandler(this.entityEditorToolStripMenuItem_Click);
+            // 
+            // playerEditorToolStripMenuItem
+            // 
+            this.playerEditorToolStripMenuItem.Name = "playerEditorToolStripMenuItem";
+            this.playerEditorToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.playerEditorToolStripMenuItem.Text = "Player Editor";
+            // 
+            // dialogueEditorToolStripMenuItem
+            // 
+            this.dialogueEditorToolStripMenuItem.Name = "dialogueEditorToolStripMenuItem";
+            this.dialogueEditorToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.dialogueEditorToolStripMenuItem.Text = "Dialogue Editor";
+            this.dialogueEditorToolStripMenuItem.Click += new System.EventHandler(this.dialogueEditorToolStripMenuItem_Click);
             // 
             // Tool
             // 
@@ -164,45 +193,13 @@
             this.Help.Size = new System.Drawing.Size(44, 20);
             this.Help.Text = "Help";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "label1";
-            // 
-            // zLevelControl
-            // 
-            this.zLevelControl.Location = new System.Drawing.Point(738, 577);
-            this.zLevelControl.Name = "zLevelControl";
-            this.zLevelControl.Size = new System.Drawing.Size(47, 20);
-            this.zLevelControl.TabIndex = 8;
-            this.zLevelControl.ValueChanged += new System.EventHandler(this.zLevelControl_ValueChanged);
-            // 
-            // hScrollBar
-            // 
-            this.hScrollBar.Location = new System.Drawing.Point(15, 577);
-            this.hScrollBar.Name = "hScrollBar";
-            this.hScrollBar.Size = new System.Drawing.Size(720, 17);
-            this.hScrollBar.TabIndex = 9;
-            this.hScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar_Scroll);
-            // 
-            // vScrollBar
-            // 
-            this.vScrollBar.Location = new System.Drawing.Point(768, 54);
-            this.vScrollBar.Name = "vScrollBar";
-            this.vScrollBar.Size = new System.Drawing.Size(17, 523);
-            this.vScrollBar.TabIndex = 10;
-            this.vScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar_Scroll);
-            // 
             // panel
             // 
-            this.panel.Location = new System.Drawing.Point(15, 54);
+            this.panel.Location = new System.Drawing.Point(0, 27);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(750, 520);
+            this.panel.Size = new System.Drawing.Size(782, 692);
             this.panel.TabIndex = 11;
+            this.panel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
             this.panel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel_MouseUp);
             // 
             // tabControl1
@@ -232,7 +229,7 @@
             this.PropTab.Location = new System.Drawing.Point(4, 22);
             this.PropTab.Name = "PropTab";
             this.PropTab.Padding = new System.Windows.Forms.Padding(3);
-            this.PropTab.Size = new System.Drawing.Size(370, 108);
+            this.PropTab.Size = new System.Drawing.Size(370, 141);
             this.PropTab.TabIndex = 1;
             this.PropTab.Text = "Props";
             this.PropTab.UseVisualStyleBackColor = true;
@@ -241,25 +238,10 @@
             // 
             this.EntityTab.Location = new System.Drawing.Point(4, 22);
             this.EntityTab.Name = "EntityTab";
-            this.EntityTab.Size = new System.Drawing.Size(370, 108);
+            this.EntityTab.Size = new System.Drawing.Size(370, 141);
             this.EntityTab.TabIndex = 2;
             this.EntityTab.Text = "Entities";
             this.EntityTab.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(788, 227);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
-            // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.newToolStripMenuItem.Text = "New";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // radioButton1
             // 
@@ -295,6 +277,49 @@
             this.radioButton3.UseVisualStyleBackColor = true;
             this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(844, 293);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(55, 17);
+            this.radioButton4.TabIndex = 20;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "Select";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(844, 368);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 22;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(914, 224);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(57, 17);
+            this.checkBox1.TabIndex = 23;
+            this.checkBox1.Text = "Delete";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Location = new System.Drawing.Point(788, 339);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox3.TabIndex = 21;
+            this.pictureBox3.TabStop = false;
+            // 
             // pictureBox2
             // 
             this.pictureBox2.Location = new System.Drawing.Point(788, 283);
@@ -303,11 +328,23 @@
             this.pictureBox2.TabIndex = 19;
             this.pictureBox2.TabStop = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(788, 227);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1178, 603);
+            this.ClientSize = new System.Drawing.Size(1178, 598);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.radioButton4);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.radioButton2);
@@ -315,19 +352,15 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel);
-            this.Controls.Add(this.vScrollBar);
-            this.Controls.Add(this.hScrollBar);
-            this.Controls.Add(this.zLevelControl);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.MainMenuStrip);
             this.Name = "Main";
             this.Text = "Editor";
             this.MainMenuStrip.ResumeLayout(false);
             this.MainMenuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zLevelControl)).EndInit();
             this.tabControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -348,10 +381,6 @@
         private System.Windows.Forms.ToolStripMenuItem terrainEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem propsEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem entityEditorToolStripMenuItem;
-        public System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown zLevelControl;
-        private System.Windows.Forms.HScrollBar hScrollBar;
-        private System.Windows.Forms.VScrollBar vScrollBar;
         private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage TerrainTab;
@@ -363,6 +392,14 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ToolStripMenuItem playerEditorToolStripMenuItem;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.ToolStripMenuItem dialogueEditorToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

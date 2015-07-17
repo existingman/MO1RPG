@@ -7,7 +7,7 @@
     <ProjectGuid>{F96FC21F-FAB6-4D2B-9152-4BF6C2AB5D76}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Editor</RootNamespace>
+    <RootNamespace>MO1.Editor</RootNamespace>
     <AssemblyName>Editor</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -44,24 +44,86 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\ImageData.cs" />
-    <Compile Include="ImageList.cs" />
+    <Compile Include="CharactorEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CharactorEditor.Designer.cs">
+      <DependentUpon>CharactorEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogueEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogueEditor.Designer.cs">
+      <DependentUpon>DialogueEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\Board.cs" />
+    <Compile Include="Content\ImageData.cs" />
+    <Compile Include="Editor\ImageList.cs" />
+    <Compile Include="Editor\ResponseEditor.cs" />
+    <Compile Include="EntityEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EntityEditor.Designer.cs">
+      <DependentUpon>EntityEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewMap.Designer.cs">
+      <DependentUpon>NewMap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PropEditor.Designer.cs">
+      <DependentUpon>PropEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="TerrainEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TerrainEditor.Designer.cs">
       <DependentUpon>TerrainEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\JunctureControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\JunctureControl.Designer.cs">
+      <DependentUpon>JunctureControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ListSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ListSelector.Designer.cs">
+      <DependentUpon>ListSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ReplyControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ReplyControl.Designer.cs">
+      <DependentUpon>ReplyControl.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="CharactorEditor.resx">
+      <DependentUpon>CharactorEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogueEditor.resx">
+      <DependentUpon>DialogueEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EntityEditor.resx">
+      <DependentUpon>EntityEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewMap.resx">
+      <DependentUpon>NewMap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -73,8 +135,20 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="PropEditor.resx">
+      <DependentUpon>PropEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TerrainEditor.resx">
       <DependentUpon>TerrainEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\JunctureControl.resx">
+      <DependentUpon>JunctureControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ListSelector.resx">
+      <DependentUpon>ListSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ReplyControl.resx">
+      <DependentUpon>ReplyControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

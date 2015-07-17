@@ -12,37 +12,29 @@ using MO1.Definitions;
 using MO1.Tech;
 using MO1.Content;
 
-namespace Editor
+namespace MO1.Editor
 {
     public partial class Main : Form
     {
         ImageList TerrainList;
         ImageList PropList;
         ImageList EntityList;
-        PictureBox[,] board;
-        private const int boardSize = 15;
+        Board Board;
         public Main()
         {
             Data.Initialise();
+            //Map.New(50, 50, 5);
+            Map.Load();
             Data.Load();
+            ImageData.Initialise();
+            ImageData.LoadImages();
+            
             InitializeComponent();
-            board = new PictureBox[boardSize, boardSize];
-            for (int x = 0; x < boardSize; x++)
-            {
-                for (int y = 0; y < boardSize; y++)
-                {
-                    board[x, y] = new PictureBox();
-                    ((System.ComponentModel.ISupportInitialize)(board[x, y])).BeginInit();
-                    board[x, y].Image = global::Editor.Properties.Resources.wall;
-                    board[x, y].Margin = new System.Windows.Forms.Padding(0);
-                    board[x, y].Name = "picturebox" + x.ToString() + "," + y.ToString();
-                    board[x, y].Size = new System.Drawing.Size(50, 50);
-                    board[x, y].Location = new Point(x * 50, y * 50);
-                    this.panel.Controls.Add(board[x, y]);
-                    board[x, y].MouseUp += board_Click;
 
-                }
-            }
+            Board = new MO1.Editor.Board(panel, 13);
+            Board.UserInput += board_Click;
+            Board.initialise();
+            
             List<Image> temp = new List<Image>();
             foreach(Terrain t in Data.Terrains)
             {
@@ -66,6 +58,8 @@ namespace Editor
             }
             EntityList = new ImageList(7, 2, temp, new Point(0, 0), this.tabControl1.TabPages[2]);
             EntityList.UserInput += select;
+
+            comboBox1.DataSource = Enum.GetNames(typeof(DoorState));
         }
 
         private void TerrainEditor_Click(object sender, EventArgs e)
@@ -81,15 +75,13 @@ namespace Editor
         private void Load_Click(object sender, EventArgs e)
         {
             Data.Load();
+            Map.Load();
+            Board.Refresh();
         }
 
         private void getImagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ImageData.Get();
-            for (int i = 0; i < ImageData.Images[ImageType.terrains].Count; i++)
-            {
-                if(i < 10) board[i, 1].Image = ImageData.Images[ImageType.terrains][i];
-            }
         }
 
         private void panel_MouseClick(object sender, EventArgs e)
@@ -101,12 +93,12 @@ namespace Editor
         {
             int x = (int)Math.Floor((decimal)MousePosition.X / 50);
             int y = (int)Math.Floor((decimal)MousePosition.Y / 50);
-            label1.Text = x.ToString() + "," + y.ToString();
         }
 
         private void Save_Click(object sender, EventArgs e)
         {
             Data.Save();
+            Map.Save();
         }
 
         private void terrainEditorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -134,28 +126,46 @@ namespace Editor
             if (l.Equals(TerrainList))
             {
                 seltype = ImageType.terrains;
-                pictureBox1.Image = ImageData.Images[seltype][Data.Terrains[objectRef].imageRef1];
+                if (objectRef > -1)
+                {
+                    pictureBox1.Image = ImageData.Images[seltype][Data.Terrains[objectRef].imageRef1];
+                }
+                else
+                {
+                    pictureBox1.Image = ImageData.No;
+                }
             }
             if (l.Equals(PropList))
             {
                 seltype = ImageType.props;
-                pictureBox1.Image = ImageData.Images[seltype][Data.Props[objectRef].imageRef1];
+                if (objectRef > -1)
+                {
+                    pictureBox1.Image = ImageData.Images[seltype][Data.Props[objectRef].imageRef1];
+                }
+                else
+                {
+                    pictureBox1.Image = ImageData.No;
+                }
             }
             if (l.Equals(EntityList))
             {
                 seltype = ImageType.entities;
-                pictureBox1.Image = ImageData.Images[seltype][Data.Entities[objectRef].imageRef1];
+                if (objectRef > -1)
+                {
+                    pictureBox1.Image = ImageData.Images[seltype][Data.Entities[objectRef].imageRef1];
+                }
+                else
+                {
+                    pictureBox1.Image = ImageData.No;
+                }
             }
         }
 
         bool seccondClick = false;
         Coord FirstCoord;
-        private void board_Click(object sender, EventArgs e)
+        Tile TargetTile;
+        private void board_Click(int xTarg, int yTarg, int zTarg)
         {
-            Point target = panel.PointToClient(Form.MousePosition);
-            int xTarg = target.X / 50 + hScrollBar.Value;
-            int yTarg = target.Y / 50 + vScrollBar.Value;
-            int zTarg = (int)zLevelControl.Value;
             if (radioButton1.Checked)
             {
                 Map.Apply(seltype, objectRef, xTarg, yTarg, zTarg);
@@ -204,56 +214,71 @@ namespace Editor
                 }
             }
 
+            if(radioButton4.Checked)
+            {
+                TargetTile = Map.Tile[xTarg, yTarg, zTarg];
+                if(TargetTile.PropRef != -1)
+                {
+                    pictureBox3.Image = ImageData.Images[ImageType.props][Data.Props[TargetTile.PropRef].imageRef1];
+                    comboBox1.SelectedIndex = (int)TargetTile.DoorState;
+                }
 
-            Refresh();
+            }
+
+
+            Board.Refresh();
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Map.Intialise();
-            vScrollBar.Maximum = Map.XSize - boardSize - 1;
-            hScrollBar.Maximum = Map.YSize - boardSize - 1;
-            zLevelControl.Maximum = Map.ZSize - 1;
+            //folderBrowserDialog1.ShowDialog();
+            //folderBrowserDialog1
+            //folderBrowserDialog1.SelectedPath;
+            //new NewMap();
+            
         }
 
-        public void Refresh()
-        {
-            for (int x = 0; x < boardSize; x++)
-            {
-                for (int y = 0; y < boardSize; y++)
-                {
-                    Tile temp =  Map.Tile[hScrollBar.Value + x, vScrollBar.Value + y, (int)zLevelControl.Value];
-                    if(temp.TerrainRef == -1)
-                    {
-                        board[x, y].Image = null;
-                    }
-                    else
-                    {
-                        board[x, y].Image = ImageData.Images[ImageType.terrains][Data.Terrains[temp.TerrainRef].imageRef1];
-                    }
-                }
-            }
-        }
 
-        private void hScrollBar_Scroll(object sender, ScrollEventArgs e)
-        {
-            Refresh();
-        }
-
-        private void vScrollBar_Scroll(object sender, ScrollEventArgs e)
-        {
-            Refresh();
-        }
-
-        private void zLevelControl_ValueChanged(object sender, EventArgs e)
-        {
-            Refresh();
-        }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void propsEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new PropEditor();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (TargetTile != null)
+            {
+                TargetTile.DoorState = (DoorState)comboBox1.SelectedIndex;
+            }
+        }
+
+        private void dialogueEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new DialogueEditor().ShowDialog();
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void entityEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new EntityEditor().ShowDialog();
+        }
+
+
 
 
 

@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\UnityProject\Assets\pluggins\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -37,26 +40,52 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\Program Files\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Content\Data.cs" />
-    <Compile Include="Content\Map.cs" />
-    <Compile Include="Definitions\Action.cs" />
-    <Compile Include="Definitions\Entity.cs" />
-    <Compile Include="Definitions\IThing.cs" />
-    <Compile Include="Definitions\Prop.cs" />
-    <Compile Include="Definitions\Terrain.cs" />
-    <Compile Include="Definitions\Tile.cs" />
+    <Compile Include="Code\Content\BaseStats.cs" />
+    <Compile Include="Code\Content\Data.cs" />
+    <Compile Include="Code\Content\Map.cs" />
+    <Compile Include="Code\Content\Player.cs" />
+    <Compile Include="Code\Definitions\Actions\Action.cs" />
+    <Compile Include="Code\Definitions\Actions\AlterLock.cs" />
+    <Compile Include="Code\Definitions\Actions\EnableReply.cs" />
+    <Compile Include="Code\Definitions\Actions\Trigger.cs" />
+    <Compile Include="Code\Definitions\Dialogues\Dialogue.cs" />
+    <Compile Include="Code\Definitions\Dialogues\Juncture.cs" />
+    <Compile Include="Code\Definitions\Dialogues\Reply.cs" />
+    <Compile Include="Code\Definitions\Entities\Charactors\Inventory.cs" />
+    <Compile Include="Code\Definitions\Dialogues\Conversation.cs" />
+    <Compile Include="Code\Definitions\Entities\Monsters\Monster.cs" />
+    <Compile Include="Code\Definitions\INameable.cs" />
+    <Compile Include="Code\Definitions\Quests\Quest.cs" />
+    <Compile Include="Code\Definitions\Combat\AttackType.cs" />
+    <Compile Include="Code\Definitions\Entities\Entity.cs" />
+    <Compile Include="Code\Definitions\Items\Item.cs" />
+    <Compile Include="Code\Definitions\Items\Ammo.cs" />
+    <Compile Include="Code\Definitions\Items\Armour.cs" />
+    <Compile Include="Code\Definitions\Items\Currency.cs" />
+    <Compile Include="Code\Definitions\Items\Equipment.cs" />
+    <Compile Include="Code\Definitions\Items\Key.cs" />
+    <Compile Include="Code\Definitions\Items\Shield.cs" />
+    <Compile Include="Code\Definitions\Items\Weapon.cs" />
+    <Compile Include="Code\Definitions\IThing.cs" />
+    <Compile Include="Code\Definitions\Props\Prop.cs" />
+    <Compile Include="Code\Definitions\Terrains\Terrain.cs" />
+    <Compile Include="Code\Definitions\Tiles\Tile.cs" />
+    <Compile Include="Code\Definitions\Entities\Charactors\Charactor.cs" />
+    <Compile Include="Code\Tech\Coord.cs" />
+    <Compile Include="Code\Tech\UltraList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tech\Tech.cs" />
+    <Compile Include="Code\Tech\Tech.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Definitions\Entities\" />
-    <Folder Include="Definitions\Props\" />
-    <Folder Include="Definitions\Terrains\" />
-    <Folder Include="Definitions\Tiles\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)Code" "$(SolutionDir)..\UnityProject\Assets\Scripts\Common" /Y /I /R /E</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

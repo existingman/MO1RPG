@@ -1,1 +1,11 @@
 C:\Users\Laurence\Documents\MasterOfOne\Assets\Scripts\Player\obj\Debug\Player.csprojResolveAssemblyReference.cache
+C:\Projects\MO1Git\MO1RPG\VSsolution\Player\obj\Debug\Player.csprojResolveAssemblyReference.cache
+C:\Projects\MO1Git\MO1RPG\VSsolution\Player\bin\Debug\Player.dll
+C:\Projects\MO1Git\MO1RPG\VSsolution\Player\bin\Debug\Player.pdb
+C:\Projects\MO1Git\MO1RPG\VSsolution\Player\bin\Debug\MO1Common.dll
+C:\Projects\MO1Git\MO1RPG\VSsolution\Player\bin\Debug\UnityEngine.dll
+C:\Projects\MO1Git\MO1RPG\VSsolution\Player\bin\Debug\MO1Common.pdb
+C:\Projects\MO1Git\MO1RPG\VSsolution\Player\obj\Debug\Player.dll
+C:\Projects\MO1Git\MO1RPG\VSsolution\Player\obj\Debug\Player.pdb
+C:\Projects\MO1Git\MO1RPG\VSsolution\Player\bin\Debug\UnityEngine.xml
+C:\Projects\MO1Git\MO1RPG\VSsolution\Player\bin\Debug\Newtonsoft.Json.dll
