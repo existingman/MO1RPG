@@ -68,6 +68,26 @@ namespace MO1.Definitions
                         if (target.IsNear(_coord))
                         {
                             VisionField.Add(target);
+                            if(MO1.Content.Map.Get(_coord).TerrainType == TerrainType.stairs)
+                            {
+                                Coord myCoord;
+                                myCoord = new Coord(target.X, target.Y, target.Z + 1);
+                                if (Tech.Tech.isValid(myCoord))
+                                {
+                                    if(MO1.Content.Map.Get(myCoord).TerrainType == TerrainType.stairs)
+                                    {
+                                        VisionField.Add(myCoord);
+                                    }
+                                }
+                                myCoord = new Coord(target.X, target.Y, target.Z - 1);
+                                if (Tech.Tech.isValid(myCoord))
+                                {
+                                    if (MO1.Content.Map.Get(myCoord).TerrainType == TerrainType.stairs)
+                                    {
+                                        VisionField.Add(myCoord);
+                                    }
+                                }
+                            }
                         }
                         else
                         {
@@ -92,6 +112,31 @@ namespace MO1.Definitions
                         }
                     }
                 }
+            }
+            List<Coord> tempList = new List<Coord>();
+            foreach(Coord c in VisionField)
+            {
+                if (Tech.Tech.isValid(c))
+                {
+                    if (MO1.Content.Map.Get(c).TerrainType == TerrainType.None)
+                    {
+                        int i = 0;
+                        for (; ; )
+                        {
+                            i--;
+                            Coord tempCoord = new Coord(c.X, c.Y, c.Z + i);
+                            tempList.Add(tempCoord);
+                            if (MO1.Content.Map.Get(tempCoord).TerrainType != TerrainType.None)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            foreach (Coord c in tempList)
+            {
+                VisionField.Add(c);
             }
         }
 

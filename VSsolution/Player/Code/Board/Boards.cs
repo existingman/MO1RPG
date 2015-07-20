@@ -11,7 +11,7 @@ namespace MO1.Boards
     {
         const int xDim = 21;
         const int yDim = 21;
-        const int zDim = 1;
+        const int zDim = 3;
         public static GameObject Root;
         public static TileDisplay[, ,] Tile;
         public static GameObject[] layer;
@@ -25,7 +25,8 @@ namespace MO1.Boards
                 layer[z] = new GameObject();
                 layer[z].name = "layer" + z.ToString();
                 layer[z].transform.parent = Root.transform;
-                layer[z].transform.position = new Vector3(0, 0, z);
+                layer[z].transform.position = new Vector3(0, 0, -z);
+                //layer[z].transform.localScale = new Vector3(0.5f + z * 0.2f, 0.5f + z * 0.2f, 1);
             }
             Tile = new TileDisplay [xDim, yDim, zDim];
 
@@ -35,10 +36,12 @@ namespace MO1.Boards
                 {
                     for (int z = 0; z < zDim; z++)
                     {
+                        float size = 0.5f + z * 0.1f;
                         Tile[x, y, z] = new TileDisplay();
                         Tile[x, y, z].Root.name = "Tile:" + x.ToString() + "," + y.ToString() + "," + z.ToString(); 
                         Tile[x, y, z].Root.transform.parent = layer[z].transform;
-                        Tile[x, y, z].Root.transform.position = new Vector3(x - xDim/2f, y - yDim/2f, 0);
+                        Tile[x, y, z].Root.transform.localPosition = new Vector3((x - xDim / 2f) * size, (y - yDim / 2f) * size, 0);
+                        Tile[x, y, z].Root.transform.localScale = new Vector3(size, size, 1);
                     }
                 }
             }
@@ -55,8 +58,8 @@ namespace MO1.Boards
                 {
                     for (int z = 0; z < zDim; z++)
                     {
-                        Coord target = new Coord(x + Player.PlayerCharactor.Coord.X - xDim / 2, y + Player.PlayerCharactor.Coord.Y - yDim / 2, z + Player.PlayerCharactor.Coord.Z - zDim / 2);
-                        if (z == 0)
+                        Coord target = new Coord(x + Player.PlayerCharactor.Coord.X - xDim / 2, y + Player.PlayerCharactor.Coord.Y - yDim / 2, z + Player.PlayerCharactor.Coord.Z - zDim + 1);
+                        if (z == zDim - 1)
                         {
                             target = target.StairCheck();
                         }

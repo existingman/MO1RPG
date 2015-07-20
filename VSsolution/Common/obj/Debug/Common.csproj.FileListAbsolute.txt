@@ -5,7 +5,6 @@ C:\Users\Laurence\Documents\MO1Git\VSsolution\Common\obj\Debug\MO1Common.dll
 C:\Users\Laurence\Documents\MO1Git\VSsolution\Common\obj\Debug\MO1Common.pdb
 C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Common\bin\Debug\MO1Common.dll
 C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Common\bin\Debug\MO1Common.pdb
-C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
 C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Common\obj\Debug\MO1Common.dll
 C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Common\obj\Debug\MO1Common.pdb
 C:\Users\Laurence\Documents\MO1Git\MO1RPG\VSsolution\Common\bin\Debug\MO1Common.dll
@@ -21,3 +20,4 @@ C:\Projects\MO1Git\MO1RPG\VSsolution\Common\bin\Debug\UnityEngine.dll
 C:\Projects\MO1Git\MO1RPG\VSsolution\Common\bin\Debug\UnityEngine.xml
 C:\Projects\MO1Git\MO1RPG\VSsolution\Common\bin\Debug\Newtonsoft.Json.dll
 C:\Projects\MO1Git\MO1RPG\VSsolution\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Common\bin\Debug\Newtonsoft.Json.dll

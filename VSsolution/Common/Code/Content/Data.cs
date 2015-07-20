@@ -38,7 +38,25 @@ namespace MO1.Content
             BaseDir = Path.Combine(BaseDir, "Assets");
             BaseDir = Path.Combine(BaseDir, "Resources");
             */
-            BaseDir = "C:/Projects/MO1Git/MO1RPG/Game";
+
+            /*
+            BaseDir = AppDomain.CurrentDomain.BaseDirectory;
+            while (true)
+            {
+                BaseDir = Directory.GetParent(BaseDir).FullName;
+                string test = Path.GetFileName(BaseDir);
+                if (test.Contains("MO1RPG"))
+                {
+                    break;
+                }
+                if (BaseDir == null)
+                {
+                    break;
+                }
+            }
+            BaseDir = Path.Combine(BaseDir, "Game");
+               */
+            BaseDir = "C:/Users/Buddy/Documents/MO1Git/MO1RPG/Game";
         }
 
        

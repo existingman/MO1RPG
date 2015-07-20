@@ -48,6 +48,8 @@ namespace MO1.Content
                 case Definitions.DoorState.closed:
                     t.DoorState = Definitions.DoorState.open;
                     UnityEngine.Debug.Log("Opening!");
+                    Player.PlayerCharactor.UpdateVisionField();
+                    Player.AssertVision(true);
                     return;
 
                 case Definitions.DoorState.lockedClosed:

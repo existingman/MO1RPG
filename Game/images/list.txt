@@ -1,4 +1,4 @@
-8
+13
 50p
 door
 floor
@@ -7,10 +7,16 @@ wall
 water
 window
 stairs
-3
+dirt
+lava
+lava2
+Road
+smallSlabs
+4
 black
 ClosedDoor
 OpenDoor
+Window
 1
 black
 1
