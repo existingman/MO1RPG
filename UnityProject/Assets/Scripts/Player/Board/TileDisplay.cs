@@ -17,9 +17,7 @@ namespace MO1.Boards
 
         public SpriteRenderer Terrain;
         public SpriteRenderer Prop;
-        public SpriteRenderer Entity;
         public SpriteRenderer Overlay;
-
         
         public TileDisplay()
         {
@@ -37,12 +35,6 @@ namespace MO1.Boards
             _prop.transform.parent = Root.transform;
             _prop.transform.position = new Vector3(0, 0, -0.01f);
             Prop = _prop.AddComponent<SpriteRenderer>();
-
-            _entity = new GameObject();
-            _entity.name = "Entity Layer";
-            _entity.transform.parent = Root.transform;
-            _entity.transform.position = new Vector3(0, 0, -0.02f);
-            Entity = _entity.AddComponent<SpriteRenderer>();
 
             _overlay = new GameObject();
             _overlay.name = "Overlay Layer";
@@ -95,28 +87,16 @@ namespace MO1.Boards
                 if (tile.LineOfSight)
                 {
                     Overlay.sprite = null;
-                    if (tile.Entity != null)
-                    {
-                        Entity temp = tile.Entity;
-                        //Entity.sprite = Images.Image[ImageType.entities][temp.imageRef1];
-                        // need to display entity
-                    }
-                    else
-                    {
-                        Entity.sprite = null;
-                    }
                 }
                 else
                 {
                     Overlay.sprite = Images.Gray;
-                    Entity.sprite = null;
                 }
             }
             else
             {
                 Terrain.sprite = Images.Black;
                 Prop.sprite = null;
-                Entity.sprite = null;
                 Overlay.sprite = null;
             }
         }
@@ -125,7 +105,6 @@ namespace MO1.Boards
         {
             Terrain.sprite = null;
             Prop.sprite = null;
-            Entity.sprite = null;
             Overlay.sprite = null;
         }
     }

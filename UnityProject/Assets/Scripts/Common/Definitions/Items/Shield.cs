@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace MO1.Definitions.Items
 {
-    class Shield: Equipment
+    public class Shield : Equipment
     {
+
     }
 }

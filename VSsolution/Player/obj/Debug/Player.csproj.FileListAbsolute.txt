@@ -17,3 +17,15 @@ C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Player\bin\Debug\MO1Common.pdb
 C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Player\obj\Debug\Player.csprojResolveAssemblyReference.cache
 C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Player\obj\Debug\Player.dll
 C:\Users\Buddy\Documents\MO1Git\MO1RPG\VSsolution\Player\obj\Debug\Player.pdb
+C:\MO1RPG\VSsolution\Player\obj\Debug\Player.csprojResolveAssemblyReference.cache
+C:\MO1RPG\VSsolution\Player\bin\Debug\Player.dll
+C:\MO1RPG\VSsolution\Player\bin\Debug\Player.pdb
+C:\MO1RPG\VSsolution\Player\bin\Debug\MO1Common.dll
+C:\MO1RPG\VSsolution\Player\bin\Debug\UnityEngine.dll
+C:\MO1RPG\VSsolution\Player\bin\Debug\Newtonsoft.Json.dll
+C:\MO1RPG\VSsolution\Player\bin\Debug\MO1Common.pdb
+C:\MO1RPG\VSsolution\Player\bin\Debug\UnityEngine.xml
+C:\MO1RPG\VSsolution\Player\obj\Debug\Player.dll
+C:\MO1RPG\VSsolution\Player\obj\Debug\Player.pdb
+C:\MO1RPG\VSsolution\Player\bin\Debug\UnityEngine.UI.dll
+C:\MO1RPG\VSsolution\Player\bin\Debug\UnityEngine.UI.xml

@@ -1,0 +1,1 @@
+[{"Attacks":[],"ImageRef":0,"stacks":1,"AmmoType":0,"Slot":30,"MatName":"Copper","Name":"Copper Arrow"}]

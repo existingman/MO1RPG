@@ -9,6 +9,8 @@ using MO1.Tech;
 using MO1.Content;
 using System.Collections;
 
+using MO1.Definitions.Entities;
+
 namespace MO1.Editor.UserControls
 {
     public delegate void IndexChange(int i);

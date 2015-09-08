@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using MO1.Definitions;
+using MO1.Definitions.Entities;
 using MO1.Definitions.Charactors;
+using MO1.Definitions.Dialogues;
 using MO1.Tech;
 using Newtonsoft.Json;
-
+using System.Collections;
+using MO1.Definitions.Entities.AIs;
 
 
 namespace MO1.Content
@@ -18,6 +22,8 @@ namespace MO1.Content
         public static List<Entity> Entities = new List<Entity>();
         public static List<Dialogue> Dialogues = new List<Dialogue>();
         public static List<Quest> Quests = new List<Quest>();
+        public static List<Item> Items = new List<Item>();
+        public static List<Faction> Factions = new List<Faction>();
 
 
   
@@ -56,7 +62,7 @@ namespace MO1.Content
             }
             BaseDir = Path.Combine(BaseDir, "Game");
                */
-            BaseDir = "C:/Users/Buddy/Documents/MO1Git/MO1RPG/Game";
+            BaseDir = "C:/Projects/MO1RPG/Game";
         }
 
        
@@ -86,9 +92,13 @@ namespace MO1.Content
             tempJson = JsonConvert.SerializeObject(Props.ToArray());
             System.IO.File.WriteAllText(filename, tempJson);
 
-            filename = Path.Combine(dataDir, "entities.txt");
-            tempJson = JsonConvert.SerializeObject(Entities.ToArray());
-            System.IO.File.WriteAllText(filename, tempJson);
+            var entitiesGroupedByType = Entities.GroupBy(i => i.GetType()).ToList();
+            foreach (var entityTypeGroup in entitiesGroupedByType)
+            {
+                filename = Path.Combine(dataDir, "entities." + entityTypeGroup.Key + ".txt");
+                tempJson = JsonConvert.SerializeObject(entityTypeGroup.ToArray());
+                System.IO.File.WriteAllText(filename, tempJson);
+            }
 
             filename = Path.Combine(dataDir, "dialogues.txt");
             tempJson = JsonConvert.SerializeObject(Dialogues.ToArray());
@@ -99,46 +109,15 @@ namespace MO1.Content
             System.IO.File.WriteAllText(filename, tempJson);
 
 
-            /*
-            string contentlist = Path.Combine(BaseDir, "content.txt");
-            if (File.Exists(contentlist))
+            var itemsGroupedByType = Items.GroupBy(i => i.GetType()).ToList();
+            foreach(var itemTypeGroup in itemsGroupedByType)
             {
-                File.Delete(contentlist);
-            }
-            using (StreamWriter sw = new StreamWriter(contentlist))
-            {
-                
-                //Run through each of the lists of game elements and save all of their references to disk
-                //Terrains
-                sw.WriteLine(Terrains.Count);
-                foreach (Terrain t in Terrains)
-                {
-                    sw.WriteLine(t.Name);
-                    sw.WriteLine((int)(t.TerrainType));
-                    sw.WriteLine(t.imageRef1);
-                    sw.WriteLine(t.imageRef2);
-                }
+                filename = Path.Combine(dataDir, "items." +itemTypeGroup.Key + ".txt");
 
-                //props
-                sw.WriteLine(Props.Count);
-                foreach (Prop p in Props)
-                {
-                    sw.WriteLine(p.Name);
-                    sw.WriteLine((int)(p.proptype));
-                    sw.WriteLine(p.imageRef1);
-                    sw.WriteLine(p.imageRef2);
-                    sw.WriteLine(p.DescriptionRef);
-                }
-
-                //entities
-                sw.WriteLine(Entities.Count);
-                foreach (Entity e in Entities)
-                {
-                    sw.WriteLine(e.Name);
-                    sw.WriteLine(e.imageRef1);
-                }
+                tempJson = JsonConvert.SerializeObject(itemTypeGroup.ToArray());
+                System.IO.File.WriteAllText(filename, tempJson);
             }
-                 * */
+            
         }
 
         public static void Load()
@@ -147,100 +126,73 @@ namespace MO1.Content
             string tempJson;
             string dataDir = Path.Combine(BaseDir, "data");
 
-            Terrains = new List<Terrain>();
             filename = Path.Combine(dataDir, "terrains.txt");
             tempJson = System.IO.File.ReadAllText(filename);
             Terrains = (List<Terrain>)JsonConvert.DeserializeObject(tempJson, typeof(List<Terrain>));
             if (Terrains.Count == 0) Terrains.Add( new Terrain());
 
-            Props = new List<Prop>();
             filename = Path.Combine(dataDir, "props.txt");
             tempJson = System.IO.File.ReadAllText(filename);
             Props = (List<Prop>)JsonConvert.DeserializeObject(tempJson, typeof(List<Prop>));
             if (Props.Count == 0) Props.Add(new Prop());
 
-            Entities = new List<Entity>();
-            filename = Path.Combine(dataDir, "entities.txt");
-            tempJson = System.IO.File.ReadAllText(filename);
-            Entities = (List<Entity>)JsonConvert.DeserializeObject(tempJson, typeof(List<Entity>));
-            if (Entities.Count == 0) Entities.Add(new Entity());
+            var entityFiles = Directory.GetFiles(dataDir, "entities.*");
+            foreach (var entityFile in entityFiles)
+            {
+                //Expect something like "MyDir/items.M01.Definitions.Hat.txt"
+                var typeName = entityFile;
+                // remove the directory
+                typeName = typeName.Replace('\\', '/').Split('/').Last();
+                //remove the "entities." and ".txt"
+                typeName = typeName.Replace("entities.", "").Replace(".txt", "");
+
+                //Figure out type bases on type name
+                var entityType = Type.GetType(typeName);
+                var entityListType = typeof(List<>).MakeGenericType(entityType);
+
+                tempJson = System.IO.File.ReadAllText(entityFile);
+                IList parsedEntities = (IList)JsonConvert.DeserializeObject(tempJson, entityListType);
+                foreach (var entity in parsedEntities)
+                {
+                    Entities.Add((Entity)entity);
+                }
+            }
 
 
-            Dialogues = new List<Dialogue>();
             filename = Path.Combine(dataDir, "dialogues.txt");
             tempJson = System.IO.File.ReadAllText(filename);
             Dialogues = (List<Dialogue>)JsonConvert.DeserializeObject(tempJson, typeof(List<Dialogue>));
             if (Dialogues.Count == 0) Dialogues.Add(new Dialogue());
 
 
-            Quests = new List<Quest>();
             filename = Path.Combine(dataDir, "quests.txt");
             tempJson = System.IO.File.ReadAllText(filename);
             Quests = (List<Quest>)JsonConvert.DeserializeObject(tempJson, typeof(List<Quest>));
             if (Quests.Count == 0) Quests.Add(new Quest());
 
 
-
-            /*
-            string contentlist = Path.Combine(BaseDir, "content.txt");
-            if (File.Exists(contentlist))
+            var itemFiles = Directory.GetFiles(dataDir, "items.*");
+            foreach(var itemFile in itemFiles)
             {
-                using (StreamReader sr = new StreamReader(contentlist))
-                {
-                    //runs through each of the lists of game elements and fills it from the disk
-                    //terrains
-                    int count = Convert.ToInt32(sr.ReadLine());
-                    for (int c = 0; c < count; c++ )
-                    {
-                        Terrain t = new Terrain();
-                        t.Name = sr.ReadLine();
-                        t.TerrainType = (TerrainType)(Convert.ToInt32(sr.ReadLine()));
-                        t.imageRef1 = Convert.ToInt32(sr.ReadLine());
-                        t.imageRef2 = Convert.ToInt32(sr.ReadLine());
-                        Terrains.Add(t);
-                    }
+                //Expect something like "MyDir/items.M01.Definitions.Hat.txt"
+                var typeName = itemFile;
+                // remove the directory
+                typeName = typeName.Replace('\\', '/').Split('/').Last();
+                //remove the "items." and ".txt"
+                typeName = typeName.Replace("items.", "").Replace(".txt", "");
 
-                    //props
-                    count = Convert.ToInt32(sr.ReadLine());
-                    for (int c = 0; c < count; c++)
-                    {
-                        Prop p = new Prop();
-                        p.Name = sr.ReadLine();
-                        p.proptype = (PropType)(Convert.ToInt32(sr.ReadLine()));
-                        p.imageRef1 = Convert.ToInt32(sr.ReadLine());
-                        p.imageRef2 = Convert.ToInt32(sr.ReadLine());
-                        p.DescriptionRef = Convert.ToInt32(sr.ReadLine());
-                        Props.Add(p);
-                    }
-                    //entities
-                    count = Convert.ToInt32(sr.ReadLine());
-                    for (int c = 0; c < count; c++)
-                    {
-                        Entity e = new Entity();
-                        e.Name = sr.ReadLine();
-                        e.imageRef1 = Convert.ToInt32(sr.ReadLine());
-                        Entities.Add(e);
-                    }
+                //Figure out type bases on type name
+                var itemType = Type.GetType(typeName);
+                var itemListType = typeof(List<>).MakeGenericType(itemType);
+
+                tempJson = System.IO.File.ReadAllText(itemFile);
+                IList parsedItems = (IList)JsonConvert.DeserializeObject(tempJson, itemListType);
+                foreach(var item in parsedItems)
+                {
+                    Items.Add((Item)item);
                 }
             }
-            else
-            {
-                Console.WriteLine("content file not found");
-                Terrain terain = new Terrain();
-                terain.imageRef1 = 0;
-                Terrains.Add(terain);
 
-                
-                Prop prop = new Prop();
-                prop.imageRef1 = 0;
-                Props.Add(prop);
-
-                Entity entity = new Entity();
-                entity.imageRef1 = 0;
-                Entities.Add(entity);
-                
-            }
-             * */
         }
 
 

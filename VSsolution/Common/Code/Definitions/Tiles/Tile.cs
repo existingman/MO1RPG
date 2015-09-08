@@ -18,9 +18,9 @@ namespace MO1.Definitions
         public bool Traversed = false;
 
         //Prop state
-        public DoorState DoorState;
-        public int KeyRef;
-        public int ActionRef;
+        public DoorState DoorState {get; set;}
+        public int KeyRef { get; set; }
+        public int ActionRef { get; set; }
 
         //Entity
         public Entity Entity;

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using MO1.Content;
+
 namespace MO1.Editor
 {
     static class Program
@@ -16,6 +18,16 @@ namespace MO1.Editor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            Data.Initialise();
+            BaseStats.Init();
+            Data.Load();
+            Map.Load();
+            PlayerFile.Load();
+            ImageData.Initialise();
+            ImageData.LoadImages();
+
+
             Application.Run(new Main());
         }
     }

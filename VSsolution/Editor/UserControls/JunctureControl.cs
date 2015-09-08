@@ -120,5 +120,10 @@ namespace MO1.Editor.UserControls
 
         }
 
+        private void JunctureControl_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

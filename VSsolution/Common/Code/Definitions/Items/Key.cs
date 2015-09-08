@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MO1.Definitions.Items
 {
-    class Key: Item
+    public class Key : Item
     {
         int KeyCode;
 

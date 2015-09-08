@@ -66,6 +66,12 @@
     <Compile Include="EntityEditor.Designer.cs">
       <DependentUpon>EntityEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="ItemEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemEditor.Designer.cs">
+      <DependentUpon>ItemEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,30 @@
     </Compile>
     <Compile Include="TerrainEditor.Designer.cs">
       <DependentUpon>TerrainEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="testtool.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="testtool.Designer.cs">
+      <DependentUpon>testtool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\genericListFillerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\genericListFillerControl.Designer.cs">
+      <DependentUpon>genericListFillerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\InventoryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\InventoryControl.Designer.cs">
+      <DependentUpon>InventoryControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ItemControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ItemControl.Designer.cs">
+      <DependentUpon>ItemControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\JunctureControl.cs">
       <SubType>UserControl</SubType>
@@ -119,6 +149,9 @@
     <EmbeddedResource Include="EntityEditor.resx">
       <DependentUpon>EntityEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ItemEditor.resx">
+      <DependentUpon>ItemEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -140,6 +173,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TerrainEditor.resx">
       <DependentUpon>TerrainEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="testtool.resx">
+      <DependentUpon>testtool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\genericListFillerControl.resx">
+      <DependentUpon>genericListFillerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\InventoryControl.resx">
+      <DependentUpon>InventoryControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ItemControl.resx">
+      <DependentUpon>ItemControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\JunctureControl.resx">
       <DependentUpon>JunctureControl.cs</DependentUpon>

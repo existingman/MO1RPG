@@ -1,33 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using MO1.Definitions;
+using MO1.Content;
 using MO1.Tech;
 using MO1.Definitions.Entities;
+using MO1.Definitions.Entities.Bodies;
 
 namespace MO1.Definitions
 {
-    public enum EntityType { None, Monster, Charactor }
-    public class Entity : INameable
+    public delegate void bang();
+    public abstract class Entity : INameable, ICloneable
     {
-        public static Dictionary<EntityType, Type> EntityDict = new Dictionary<EntityType, Type>()
-        {
-            {EntityType.None, typeof(Entity)},
-            {EntityType.Charactor, typeof(Charactor)},
-            {EntityType.Monster, typeof(Monster)}
-        };
-
-        public static Dictionary<Type, EntityType> RevEntityDict = new Dictionary<Type, EntityType>()
-        {
-            {typeof(Entity), EntityType.None},
-            {typeof(Charactor), EntityType.Charactor},
-            {typeof(Monster), EntityType.Monster}
-        };
+        public event bang OnMove;
 
         //GenericStuff
-        public int imageRef1 {get; set;}
+        public virtual int imageRef1
+        {
+            get { return 0; }
+            set { }
+        }
 
         //Individual stuff
-        public List<Coord> VisionField;
+        public Body Body;
+        public AI AI;
+        public Targeter Targeter;
+        public List<Target> Targets;
+        public List<Coord> VisionField() { return _visionField; }
+        private List<Coord> _visionField;
+
+        private List<int> FactionRefs = new List<int>();
+        public List<Entities.AIs.Faction> Factions
+        { 
+            get 
+            {
+                List<Entities.AIs.Faction> temp = new List<Entities.AIs.Faction>();
+                foreach(int i in FactionRefs)
+                {
+                    temp.Add(Data.Factions[i]);
+                }
+                return temp;
+            } 
+        }
+
+        public abstract void Initialise();
+
         private Tech.Coord _coord;
         public Tech.Coord Coord
         {
@@ -40,24 +56,21 @@ namespace MO1.Definitions
                     _coord = value;
                     Content.Map.Get(_coord).Entity = this;
                     UpdateVisionField();
+                    if(OnMove != null) OnMove();
                 }
             }
         }
-        public Tile Owner { get { return Content.Map.Get(_coord); } }
+        public Tile Owner() { return Content.Map.Get(_coord); }
+
 
         //Inameable stuff
-        private string _name = "Unnamed";
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
+        public string Name { get; set; }
 
 
         const int horrizon = 4;
         public void UpdateVisionField()
         {
-            VisionField = new List<Coord>();
+            _visionField = new List<Coord>();
             for (int x = -horrizon; x < horrizon; x++)
             {
                 for (int y = -horrizon; y < horrizon; y++)
@@ -67,7 +80,7 @@ namespace MO1.Definitions
                     {
                         if (target.IsNear(_coord))
                         {
-                            VisionField.Add(target);
+                            _visionField.Add(target);
                             if(MO1.Content.Map.Get(_coord).TerrainType == TerrainType.stairs)
                             {
                                 Coord myCoord;
@@ -76,7 +89,7 @@ namespace MO1.Definitions
                                 {
                                     if(MO1.Content.Map.Get(myCoord).TerrainType == TerrainType.stairs)
                                     {
-                                        VisionField.Add(myCoord);
+                                        _visionField.Add(myCoord);
                                     }
                                 }
                                 myCoord = new Coord(target.X, target.Y, target.Z - 1);
@@ -84,7 +97,7 @@ namespace MO1.Definitions
                                 {
                                     if (MO1.Content.Map.Get(myCoord).TerrainType == TerrainType.stairs)
                                     {
-                                        VisionField.Add(myCoord);
+                                        _visionField.Add(myCoord);
                                     }
                                 }
                             }
@@ -101,7 +114,7 @@ namespace MO1.Definitions
                                 temp = temp.Plus(Tech.Tech.DirectionalSteps[direction]);
                                 if (temp.Equals(target))
                                 {
-                                    VisionField.Add(target);
+                                    _visionField.Add(target);
                                     break;
                                 }
                                 if (MO1.Content.Map.Get(temp).opaque())
@@ -114,7 +127,7 @@ namespace MO1.Definitions
                 }
             }
             List<Coord> tempList = new List<Coord>();
-            foreach(Coord c in VisionField)
+            foreach(Coord c in _visionField)
             {
                 if (Tech.Tech.isValid(c))
                 {
@@ -136,10 +149,12 @@ namespace MO1.Definitions
             }
             foreach (Coord c in tempList)
             {
-                VisionField.Add(c);
+                _visionField.Add(c);
             }
         }
 
+        public abstract object Clone();
+        
 
     }
 }

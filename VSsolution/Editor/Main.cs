@@ -22,12 +22,6 @@ namespace MO1.Editor
         Board Board;
         public Main()
         {
-            Data.Initialise();
-            //Map.New(50, 50, 5);
-            Map.Load();
-            Data.Load();
-            ImageData.Initialise();
-            ImageData.LoadImages();
             
             InitializeComponent();
 
@@ -59,7 +53,6 @@ namespace MO1.Editor
             EntityList = new ImageList(7, 2, temp, new Point(0, 0), this.tabControl1.TabPages[2]);
             EntityList.UserInput += select;
 
-            comboBox1.DataSource = Enum.GetNames(typeof(DoorState));
         }
 
         private void TerrainEditor_Click(object sender, EventArgs e)
@@ -99,6 +92,7 @@ namespace MO1.Editor
         {
             Data.Save();
             Map.Save();
+            PlayerFile.Save();
         }
 
         private void terrainEditorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -217,10 +211,38 @@ namespace MO1.Editor
             if(radioButton4.Checked)
             {
                 TargetTile = Map.Tile[xTarg, yTarg, zTarg];
-                if(TargetTile.PropRef != -1)
+                if (tabControl1.SelectedIndex == 0)
                 {
-                    pictureBox3.Image = ImageData.Images[ImageType.props][Data.Props[TargetTile.PropRef].imageRef1];
-                    comboBox1.SelectedIndex = (int)TargetTile.DoorState;
+                    pictureBox3.Image = ImageData.Images[ImageType.terrains][Data.Terrains[TargetTile.TerrainRef].imageRef1];
+                    propertyGrid1.SelectedObject = TargetTile;
+                }
+                if (tabControl1.SelectedIndex == 1)
+                {
+                    if (TargetTile.PropRef != -1)
+                    {
+                        pictureBox3.Image = ImageData.Images[ImageType.props][Data.Props[TargetTile.PropRef].imageRef1];
+                    }
+                    propertyGrid1.SelectedObject = TargetTile;
+                }
+                if (tabControl1.SelectedIndex == 2)
+                {
+                    if (TargetTile.Entity != null)
+                    {
+                        propertyGrid1.SelectedObject = TargetTile.Entity;
+                        if (TargetTile.Entity.GetType() == typeof(MO1.Definitions.Entities.Charactor))
+                        {
+                            inventoryControl1.Init(((MO1.Definitions.Entities.Charactor)(TargetTile.Entity)).Inventory);
+                        }
+                        else
+                        {
+                            inventoryControl1.Init();
+                        }
+                    }
+                    else
+                    {
+                        propertyGrid1.SelectedObject = null;
+                        inventoryControl1.Init();
+                    }
                 }
 
             }
@@ -250,14 +272,6 @@ namespace MO1.Editor
             new PropEditor();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (TargetTile != null)
-            {
-                TargetTile.DoorState = (DoorState)comboBox1.SelectedIndex;
-            }
-        }
-
         private void dialogueEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new DialogueEditor().ShowDialog();
@@ -276,6 +290,16 @@ namespace MO1.Editor
         private void entityEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new EntityEditor().ShowDialog();
+        }
+
+        private void itemEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ItemEditor().ShowDialog();
+        }
+
+        private void testToolToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new testtool().ShowDialog();
         }
 
 

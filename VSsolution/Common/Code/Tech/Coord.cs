@@ -26,6 +26,11 @@ namespace MO1.Tech
             return new Coord(X + c.X, Y + c.Y, Z + c.Z);
         }
 
+        public Coord Minus(Coord c)
+        {
+            return new Coord(X - c.X, Y - c.Y, Z - c.Z);
+        }
+
         public bool Equals(Coord c)
         {
             if (c.X != X) return false;
@@ -43,10 +48,31 @@ namespace MO1.Tech
             return true;
         }
 
+        public bool IsValid()
+        {
+            if (X < 0) return false;
+            if (Y < 0) return false;
+            if (Z < 0) return false;
+            if (X >= MO1.Content.Map.XSize) return false;
+            if (Y >= MO1.Content.Map.YSize) return false;
+            if (Z >= MO1.Content.Map.ZSize) return false;
+
+            return true;
+        }
+
+        public float VectorDist (Coord c)
+        {
+            float x = Minus(c).X;
+            float y = Minus(c).Y;
+            float z = Minus(c).Z;
+            float h = (float)Math.Sqrt(x * x + y * y);
+            return (float)Math.Sqrt(h * h + z * z);
+        }
+
         public Coord StairCheck()
         {
             Coord target = this;
-            if (MO1.Content.Map.Get(MO1.Content.Player.PlayerCharactor.Coord).TerrainType == Definitions.TerrainType.stairs)
+            if (MO1.Content.Map.Get(MO1.Content.PlayerFile.GetCoord()).TerrainType == Definitions.TerrainType.stairs)
             {
                 Coord Target2 = target.Plus(new Coord(0, 0, 1));
                 if (Tech.isValid(Target2))

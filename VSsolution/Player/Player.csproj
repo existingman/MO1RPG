@@ -40,12 +40,20 @@
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\..\..\Program Files\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\Program Files\Unity\Editor\Data\UnityExtensions\Unity\GUISystem\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\Avatars\Avatar.cs" />
+    <Compile Include="Code\Avatars\AvatarControl.cs" />
     <Compile Include="Code\Board\Boards.cs" />
     <Compile Include="Code\Board\TileDisplay.cs" />
     <Compile Include="Code\Content\Images.cs" />
+    <Compile Include="Code\GUI\AbilityPanel.cs" />
+    <Compile Include="Code\GUI\DialogueGUI.cs" />
     <Compile Include="Code\MainControl.cs" />
+    <Compile Include="Code\PlayerCTR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +62,7 @@
       <Name>MO1Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(ProjectDir)Code" "$(SolutionDir)..\UnityProject\Assets\Scripts\Player"  /Y /I /R /E</PostBuildEvent>

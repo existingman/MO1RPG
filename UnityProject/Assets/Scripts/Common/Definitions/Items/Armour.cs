@@ -5,14 +5,37 @@ using System.Linq;
 
 namespace MO1.Definitions.Items
 {
-    public class Armour: Equipment
+    public class Armour: Equipment, IDamageable
     {
-        public Armour(EqipmentSlot slot, Material mat)
+        public override string Name
         {
-            Slot = slot;
-            Material = mat;
-            string slotText = slot.ToString();
-            string temp = mat.ToString() + " ";
+            get
+            {
+                if (base.Name == "")
+                {
+                    return GenerateName();
+                }
+                else
+                {
+                    return base.Name;
+                }  
+            }
+            set
+            {
+                base.Name = value;
+            }
+        }
+
+        public virtual DamagePack TakeDamage(DamagePack Pack)
+        {
+            return Pack;
+        }
+
+        public string GenerateName()
+        {
+ 
+            string slotText = Slot.ToString();
+            string temp = this.MatName + " ";
             char first = slotText[0];
             string poop = "L";
             char L = poop[0];
@@ -41,7 +64,7 @@ namespace MO1.Definitions.Items
                     temp = temp + slotText;
                 }
             }
-            Name = temp;
+            return temp;
         }
     }
 }

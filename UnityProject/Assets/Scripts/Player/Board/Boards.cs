@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using MO1.Content;
 using MO1.Definitions;
+using MO1.Definitions.Entities;
 using MO1.Tech;
+using MO1.Avatars;
 
 namespace MO1.Boards
 {
@@ -15,6 +17,7 @@ namespace MO1.Boards
         public static GameObject Root;
         public static TileDisplay[, ,] Tile;
         public static GameObject[] layer;
+        public static List<Avatars.Avatar> Avatars = new List<Avatars.Avatar>();
 
         public static void Initialise()
         {
@@ -36,7 +39,7 @@ namespace MO1.Boards
                 {
                     for (int z = 0; z < zDim; z++)
                     {
-                        float size = 0.5f + z * 0.1f;
+                        float size = 0.5f + (z + 1) * (0.5f / zDim);
                         Tile[x, y, z] = new TileDisplay();
                         Tile[x, y, z].Root.name = "Tile:" + x.ToString() + "," + y.ToString() + "," + z.ToString(); 
                         Tile[x, y, z].Root.transform.parent = layer[z].transform;
@@ -58,7 +61,7 @@ namespace MO1.Boards
                 {
                     for (int z = 0; z < zDim; z++)
                     {
-                        Coord target = new Coord(x + Player.PlayerCharactor.Coord.X - xDim / 2, y + Player.PlayerCharactor.Coord.Y - yDim / 2, z + Player.PlayerCharactor.Coord.Z - zDim + 1);
+                        Coord target = new Coord(x + PlayerCTR.PlayerCharactor.Coord.X - xDim / 2, y + PlayerCTR.PlayerCharactor.Coord.Y - yDim / 2, z + PlayerCTR.PlayerCharactor.Coord.Z - zDim + 1);
                         if (z == zDim - 1)
                         {
                             target = target.StairCheck();
@@ -67,6 +70,22 @@ namespace MO1.Boards
                         if (Tech.Tech.isValid(target))
                         {
                             Tile[x, y, z].Display(Map.Tile[target.X, target.Y, target.Z]);
+                            if (Map.Get(target).Entity != null)
+                            {
+                                bool found = false;
+                                foreach (MO1.Avatars.Avatar a in Avatars)
+                                {
+                                    if (ReferenceEquals(a.Entity, Map.Get(target).Entity))
+                                    {
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                                if (!found)
+                                {
+                                    Avatars.Add(new Avatars.Avatar(Map.Get(target).Entity));
+                                }
+                            }
                         }
                         else
                         {

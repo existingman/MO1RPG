@@ -1,8 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Common\Content\Map.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\GUI\DialogueGUI.cs">
     <Files>
-      <File FileName="Assets\Scripts\Common\Content\Map.cs" Line="140" Column="1" />
+      <File FileName="Assets\Scripts\Player\GUI\DialogueGUI.cs" Line="98" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -50,19 +50,55 @@
      <Compile Include="Assets\Scripts\Common\Content\Data.cs" />
      <Compile Include="Assets\Scripts\Common\Content\Map.cs" />
      <Compile Include="Assets\Scripts\Common\Content\Player.cs" />
+     <Compile Include="Assets\Scripts\Common\Content\PlayerFile.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Actions\Action.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Actions\AlterLock.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Actions\EnableReply.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Actions\Trigger.cs" />
-     <Compile Include="Assets\Scripts\Common\Definitions\Combat\AttackType.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Combat\Attack.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Combat\DefensiveAttack.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Combat\MeleeAttack.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Combat\ShootAttack.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Combat\ThrowAttack.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\DamagePack.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Dialogues\Conversation.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Dialogues\Dialogue.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Dialogues\Juncture.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Dialogues\Reply.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\AIs\AI.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\AIs\DataPoint.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\AIs\Faction.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\AIs\PatrolSpace.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Body.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\BodyParts\Adomen.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\BodyParts\BodyPart.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\BodyParts\Chest.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\BodyParts\Face.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\BodyParts\Head.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\BodyParts\Neck.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\BodyParts\Segment.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Humanoid.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Limbs\Arm.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Limbs\Leg.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Limbs\Limb.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Organs\Artery.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Organs\Bone.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Organs\Brain.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Organs\Eye.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Organs\Heart.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Organs\Ligament.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Organs\Lung.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Organs\Muscle.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Organs\Organ.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Targeting\CharacterTargeter.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Targeting\Target.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Bodies\Targeting\Targeter.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Entities\Charactors\Charactor.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Entities\Charactors\CharactorStats.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Entities\Charactors\Inventory.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Entities\Entity.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Entities\Monsters\Monster.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\IDamageable.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\INameable.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\IThing.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Items\Ammo.cs" />
@@ -73,17 +109,26 @@
      <Compile Include="Assets\Scripts\Common\Definitions\Items\Key.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Items\Shield.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Items\Weapon.cs" />
+     <Compile Include="Assets\Scripts\Common\Definitions\Items\Weapons\ShortSword.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Props\Prop.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Quests\Quest.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Terrains\Terrain.cs" />
      <Compile Include="Assets\Scripts\Common\Definitions\Tiles\Tile.cs" />
+     <Compile Include="Assets\Scripts\Common\Tech\Cloner.cs" />
      <Compile Include="Assets\Scripts\Common\Tech\Coord.cs" />
      <Compile Include="Assets\Scripts\Common\Tech\Tech.cs" />
-     <Compile Include="Assets\Scripts\Common\Tech\UltraList.cs" />
+     <Compile Include="Assets\Scripts\Common\Tech\TripleDict.cs" />
+     <Compile Include="Assets\Scripts\Player\Avatars\Avatar.cs" />
+     <Compile Include="Assets\Scripts\Player\Avatars\AvatarControl.cs" />
      <Compile Include="Assets\Scripts\Player\Board\Boards.cs" />
      <Compile Include="Assets\Scripts\Player\Board\TileDisplay.cs" />
      <Compile Include="Assets\Scripts\Player\Content\Images.cs" />
+     <Compile Include="Assets\Scripts\Player\GUI\AbilityPanel.cs" />
+     <Compile Include="Assets\Scripts\Player\GUI\AnswerMono.cs" />
+     <Compile Include="Assets\Scripts\Player\GUI\AttackBtnMono.cs" />
+     <Compile Include="Assets\Scripts\Player\GUI\DialogueGUI.cs" />
      <Compile Include="Assets\Scripts\Player\MainControl.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerCTR.cs" />
      <None Include="Assets\Resources\images\list.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
@@ -95,7 +140,7 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>C:/Users/Buddy/Documents/MO1Git/MO1RPG/UnityProject/Assets/pluggins/Newtonsoft.Json.dll</HintPath>
+ <HintPath>C:/Projects/MO1RPG/UnityProject/Assets/pluggins/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

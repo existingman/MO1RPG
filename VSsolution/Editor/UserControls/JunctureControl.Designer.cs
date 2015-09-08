@@ -67,6 +67,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "JunctureControl";
             this.Size = new System.Drawing.Size(636, 341);
+            this.Load += new System.EventHandler(this.JunctureControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

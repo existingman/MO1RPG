@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using MO1.Definitions;
 using System.IO;
 using MO1.Tech;
+using Newtonsoft.Json;
+using MO1.Definitions.Entities;
+using System.Collections;
+using System.Linq;
 
 namespace MO1.Content
 {
@@ -73,15 +77,45 @@ namespace MO1.Content
            {
                New(50, 50, 5);
            }
+
+           string tempJson;
+           var entityFiles = Directory.GetFiles(Data.BaseDir, "entities.*");
+           foreach (var entityFile in entityFiles)
+           {
+               //Expect something like "MyDir/items.M01.Definitions.Hat.txt"
+               var typeName = entityFile;
+               // remove the directory
+               typeName = typeName.Replace('\\', '/').Split('/').Last();
+               //remove the "entities." and ".txt"
+               typeName = typeName.Replace("entities.", "").Replace(".txt", "");
+
+               //Figure out type bases on type name
+               var entityType = Type.GetType(typeName);
+               var entityListType = typeof(List<>).MakeGenericType(entityType);
+
+               tempJson = System.IO.File.ReadAllText(entityFile);
+               IList parsedEntities = (IList)JsonConvert.DeserializeObject(tempJson, entityListType);
+
+               foreach(Entity e in parsedEntities)
+               {
+                   //e.Initialise();
+                   Map.Get(e.Coord).Entity = e;
+               }
+           }
+
         }
 
         public static void Save()
         {
+            List<Entity> Entities = new List<Entity>();
+            //Dictionary<Entity, Coord> Coords = new Dictionary<Entity, Coord>();
+
             string MapFile = Path.Combine(Data.BaseDir, "map.txt");
             if (File.Exists(MapFile))
             {
                 File.Delete(MapFile);
             }
+            
             using (StreamWriter sw = new StreamWriter(MapFile))
             {
                 sw.WriteLine(XSize);
@@ -95,7 +129,11 @@ namespace MO1.Content
                         {
                             sw.WriteLine(Tile[x, y, z].TerrainRef);
                             sw.WriteLine(Tile[x, y, z].PropRef);
-                            //sw.WriteLine(Tile[x, y, z].EntityRef);
+                            if (Tile[x, y, z].Entity != null)
+                            {
+                                Entities.Add(Tile[x, y, z].Entity);
+                                //Coords.Add(Tile[x, y, z].Entity, new Coord(x, y, z));
+                            }
 
                             sw.WriteLine(Tile[x, y, z].LineOfSight);
                             sw.WriteLine(Tile[x, y, z].Discovered);
@@ -111,6 +149,16 @@ namespace MO1.Content
                     }
                 }
             }
+            string tempJson;
+            string filename;
+            var entitiesGroupedByType = Entities.GroupBy(i => i.GetType()).ToList();
+            foreach (var entityTypeGroup in entitiesGroupedByType)
+            {
+                filename = Path.Combine(Data.BaseDir, "entities." + entityTypeGroup.Key + ".txt");
+                tempJson = JsonConvert.SerializeObject(entityTypeGroup.ToArray());
+                System.IO.File.WriteAllText(filename, tempJson);
+            }
+
         }
 
         public static void Apply(ImageType type, int Ref, int x, int y, int z)
@@ -126,9 +174,10 @@ namespace MO1.Content
                     break;
 
                 case ImageType.entities:
-                    Tile[x, y, z].Entity = Data.Entities[Ref];
-                    // -------------- insert code to clone entity !!!! ---- This code currebtly links every instance to Data array!! --------------------------------
+                    Entity temp = (Entity)Data.Entities[Ref].Clone();
+                    temp.Coord = new Coord(x, y, z);
                     break;
+
                 case ImageType.items:
 
                     break;

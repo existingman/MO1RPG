@@ -4,6 +4,7 @@ using UnityEngine;
 using MO1.Boards;
 using MO1.Content;
 using MO1.Tech;
+using MO1.GUI;
 
 namespace MO1
 {
@@ -17,13 +18,19 @@ namespace MO1
 
         void Start()
         {
+            //The order off these initialisations can be important.
+            //Images cannot load untill Base stats initialises because it gets the material set names
+            //Board requires images, map and player because it displays the content.
             Data.Initialise();
+            BaseStats.Init();
             MO1.Content.Images.Load();
             Data.Load();
             Map.Load();
-            Player.Initialise();
+            PlayerFile.Load();
+            PlayerCTR.Initialise();
             Board.Initialise();
-
+            AbilityPanel.Initialise();
+            DialogueGUI.Initialise();
             
         }
 
@@ -54,15 +61,20 @@ namespace MO1
         {
             if (keyDirections.ContainsKey(Event.current))
             {
-                Coord target = Player.PlayerCharactor.Coord.Plus(keyDirections[Event.current]);
+                Coord target = PlayerCTR.PlayerCharactor.Coord.Plus(keyDirections[Event.current]);
                 target = target.StairCheck();
 
-                Player.WalkTo(Map.Get(target));
+                PlayerCTR.WalkTo(Map.Get(target));
                 Board.Refresh();
-                 
-
             }
             
+        }
+
+
+        public static MO1.Definitions.Combat.Attack Attack;
+        public static void SelectAttack(MO1.Definitions.Combat.Attack attack)
+        {
+            Attack = attack;
         }
 
 

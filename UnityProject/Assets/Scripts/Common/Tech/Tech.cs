@@ -8,6 +8,25 @@ namespace MO1.Tech
 
     public static class Tech
     {
+        public static string Place(int p)
+        {
+            switch (p)
+            {
+                case 1:
+                    return "1st";
+                    break;
+                case 2:
+                    return "2nd";
+                    break;
+                case 3:
+                    return "3rd";
+                    break;
+                default:
+                    return p.ToString() + "th";
+                    break;
+            }
+        }
+
         public static bool isValid(Coord coord)
         {
             if (coord.X < 0) return false;

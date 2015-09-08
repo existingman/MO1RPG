@@ -1,0 +1,1 @@
+[{"ImageRef":0,"stacks":1,"Amount":10.0,"CurrencyType":0,"Name":"copper Coins"}]

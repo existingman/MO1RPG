@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MO1.Definitions.Dialogues;
+using MO1.Definitions.Entities;
 
 namespace MO1.Definitions
 {
