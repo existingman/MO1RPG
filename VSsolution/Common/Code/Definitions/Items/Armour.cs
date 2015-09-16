@@ -7,31 +7,18 @@ namespace MO1.Definitions.Items
 {
     public class Armour: Equipment, IDamageable
     {
-        public override string Name
-        {
-            get
-            {
-                if (base.Name == "")
-                {
-                    return GenerateName();
-                }
-                else
-                {
-                    return base.Name;
-                }  
-            }
-            set
-            {
-                base.Name = value;
-            }
-        }
 
         public virtual DamagePack TakeDamage(DamagePack Pack)
         {
             return Pack;
         }
 
-        public string GenerateName()
+        public override List<Combat.Attack> Attacks
+        {
+            get { return new List<Combat.Attack>(); }
+        }
+
+        protected override string generateName()
         {
  
             string slotText = Slot.ToString();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using MO1.Definitions;
 using MO1.Boards;
 using MO1.Content;
 using MO1.Tech;
@@ -10,11 +11,7 @@ namespace MO1
 {
     public class MainControl : MonoBehaviour
     {
-
-        public void DoStuff()
-        {
-            
-        }
+        public static event Bang Tick;
 
         void Start()
         {
@@ -38,12 +35,12 @@ namespace MO1
         int count = 0;
         void Update()
         {
+            if(Tick != null) Tick();
             timer++;
             if(timer > 30)
             {
                 timer = 0;
                 count++;
-                //Debug.Log("30frames X " + count.ToString());
             }
         }
 
@@ -72,9 +69,28 @@ namespace MO1
 
 
         public static MO1.Definitions.Combat.Attack Attack;
+        public static List<Entity> ValidTargets = new List<Entity>();
+        public static bool Targeting = false;
         public static void SelectAttack(MO1.Definitions.Combat.Attack attack)
         {
             Attack = attack;
+            Targeting = true;
+            if(Attack.AttackType == Definitions.Combat.AttackType.Melee)
+            {
+                foreach(Coord c in PlayerCTR.PlayerCharactor.Coord.Surrounding(1))
+                {
+                    if(Map.Get(c).Entity != null)
+                    {
+                        ValidTargets.Add(Map.Get(c).Entity);
+                    }
+                }
+            }
+        }
+
+        public static void SelectTarget(MO1.Definitions.Entities.Bodies.Target target)
+        {
+            Attack.Do(target);
+            Targeting = false;
         }
 
 

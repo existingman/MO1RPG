@@ -1,1 +1,0 @@
-[{"Attacks":[],"ImageRef":0,"stacks":1,"WeaponType":0,"Slot":28,"MatName":"Copper","Name":"Steel LongsSword"}]

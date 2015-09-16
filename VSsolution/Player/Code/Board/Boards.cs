@@ -96,6 +96,18 @@ namespace MO1.Boards
             }
         }
 
+        public static Avatars.Avatar GetAvatar(Entity entity)
+        {
+            foreach (MO1.Avatars.Avatar a in Avatars)
+            {
+                if (ReferenceEquals(a.Entity, entity))
+                {
+                    return a;
+                }
+            }
+            return null;
+        }
+
 
     }
 }

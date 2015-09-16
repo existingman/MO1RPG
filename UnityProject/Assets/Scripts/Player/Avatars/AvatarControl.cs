@@ -4,12 +4,12 @@ using System.Linq;
 using UnityEngine;
 
 
-
 using MO1.Boards;
 using MO1.Content;
 using MO1.Definitions;
 using MO1.Definitions.Items;
 using MO1.Definitions.Entities;
+using MO1.Definitions.Entities.Bodies;
 using MO1.Tech;
 
 namespace MO1.Avatars
@@ -20,31 +20,33 @@ namespace MO1.Avatars
     public class AvatarControl : MonoBehaviour
     {
         public Charactor Charactor;
+        BoxCollider2D _collider;
         public Dictionary<EquipmentSlot, SpriteRenderer> Slots;
         public Dictionary<BodyJoint, Transform> Joints;
         public Dictionary<BodySegs, SpriteRenderer> Segments;
+        List<GameObject> AllChildren;
+        
 
         public void Init(Charactor c)
         {
-            Debug.Log("Initialising new caractor ctr");
             Charactor = c;
 
             Slots = new Dictionary<EquipmentSlot, SpriteRenderer>();
 
             List<GameObject> temp = new List<GameObject>();
             temp.Add(this.gameObject);
-            List<GameObject> AllChildren = getall(temp);
+            AllChildren = getall(temp);
 
             foreach (EquipmentSlot slot in Enum.GetValues(typeof(EquipmentSlot)))
             {
-                Debug.Log("checking: " + slot.ToString());
+                //Debug.Log("checking: " + slot.ToString());
                 string tempName = slot.ToString();
                 foreach (GameObject g in AllChildren)
                 {
                     if (g.name.Contains(tempName))
                     {
                         Slots.Add(slot, g.GetComponent<SpriteRenderer>());
-                        Debug.Log("found");
+                        //Debug.Log("found");
                         break;
                     }
                 }
@@ -54,13 +56,13 @@ namespace MO1.Avatars
             foreach (BodyJoint joint in Enum.GetValues(typeof(BodyJoint)))
             {
                 string tempName = joint.ToString();
-                Debug.Log("checking: " + tempName);
+                //Debug.Log("checking: " + tempName);
                 foreach (GameObject g in AllChildren)
                 {
                     if (g.name.Contains(tempName))
                     {
                         Joints.Add(joint, g.transform);
-                        Debug.Log("found");
+                        //Debug.Log("found");
                         break;
                     }
                 }
@@ -70,19 +72,20 @@ namespace MO1.Avatars
             foreach (BodySegs seg in Enum.GetValues(typeof(BodySegs)))
             {
                 string tempName = seg.ToString();
-                Debug.Log("checking: " + tempName);
+                //Debug.Log("checking: " + tempName);
                 foreach (GameObject g in AllChildren)
                 {
                     if (g.name.Contains(tempName))
                     {
                         Segments.Add(seg, g.GetComponent<SpriteRenderer>());
-                        Debug.Log("found");
+                        //Debug.Log("found");
                         break;
                     }
                 }
             }
+            _collider = this.gameObject.AddComponent<BoxCollider2D>();
+            _collider.size = new Vector2(0.8f, 1);
 
-            Joints[BodyJoint.Root].gameObject.AddComponent<BoxCollider2D>();
         }
 
         private List<GameObject> getall(List<GameObject> param)
@@ -144,14 +147,57 @@ namespace MO1.Avatars
             }
         }
 
-        void OnMouseOver()
+        void OnMouseEnter()
         {
-            Joints[BodyJoint.Root].transform.localScale = new Vector3(5, 5, 5);
+            if (MainControl.ValidTargets.Contains((Entity)Charactor) && MainControl.Targeting)
+            {
+                expand();
+            }
         }
 
-        void OnMouseOut()
+        private void expand()
         {
-            Joints[BodyJoint.Root].transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(5, 5, 1);
+            foreach(Target t in Charactor.Targets)
+            {
+                //Debug.Log("checking: " + t.Ref.ToString());
+                String name = "";
+                if (t.Ref.GetType() == typeof(EquipmentSlot))
+                {
+                    if (Charactor.Inventory.Equiped[(EquipmentSlot)(t.Ref)] == null)
+                    {
+                        name = t.Ref.ToString() + "Gap";
+                    }
+                    else
+                    {
+                        name = t.Ref.ToString();
+                    }
+                }
+                if (t.Ref.GetType() == typeof(HumanoidParts))
+                {
+                    name = t.Ref.ToString();
+                }
+                foreach(GameObject g in AllChildren)
+                {
+                    if(g.name == name)
+                    {
+                        SubTargetBaseMono temp = g.GetComponent<SubTargetBaseMono>();
+                        temp.Active = true;
+                        temp.Target = t;
+                        break;
+                    }
+                }
+            }
+            MainControl.Tick -= Check;
+        }
+
+        public void Check()
+        {
+            if (!_collider.bounds.Contains(Input.mousePosition))
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+                MainControl.Tick -= Check;
+            }
         }
 
     }

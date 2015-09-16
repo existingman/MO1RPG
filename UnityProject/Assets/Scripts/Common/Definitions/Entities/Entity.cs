@@ -8,10 +8,10 @@ using MO1.Definitions.Entities.Bodies;
 
 namespace MO1.Definitions
 {
-    public delegate void bang();
+    public delegate void Bang();
     public abstract class Entity : INameable, ICloneable
     {
-        public event bang OnMove;
+        public event Bang OnMove;
 
         //GenericStuff
         public virtual int imageRef1

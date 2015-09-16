@@ -48,6 +48,23 @@ namespace MO1.Tech
             return true;
         }
 
+        public List<Coord> Surrounding(int dist)
+        {
+            List<Coord> tempList = new List<Coord>();
+            for(int x = -dist; x < dist; x++)
+            {
+                for (int y = -dist; y < dist; y++)
+                {
+                    if(x != 0 || y != 0)
+                    {
+                        Coord tempCoord = new Coord(X + x, Y + y, Z);
+                        if (tempCoord.IsValid()) tempList.Add(tempCoord);
+                    }
+                }
+            }
+            return tempList;
+        }
+
         public bool IsValid()
         {
             if (X < 0) return false;

@@ -19,6 +19,11 @@ namespace MO1.Definitions.Items
             }
         }
 
+        public override List<Combat.Attack> Attacks
+        {
+            get { return new List<Combat.Attack>(); }
+        }
+
 
     }
 }

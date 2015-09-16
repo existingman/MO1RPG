@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using MO1.Definitions.Charactors;
 using MO1.Definitions.Items;
+using MO1.Definitions.Items.Weapons;
 
 namespace MO1.Editor.UserControls
 {
@@ -126,7 +127,21 @@ namespace MO1.Editor.UserControls
         public void AddToSlot(ItemControl i)
         {
             EquipmentSlot e = slots[i];
-            Equipment temp = new Equipment();
+            Equipment temp;
+            switch(e)
+            {
+                case EquipmentSlot.Weapon:
+                    temp = new ShortSword();
+                    break;
+
+                case EquipmentSlot.Shield:
+                    temp = new Shield();
+                        break;
+                default:
+                    temp = new Armour();
+                    temp.Slot = e;
+                    break;
+            }
             temp.Slot = e;
             Target.Equiped[e] = temp;
             propertyGrid1.SelectedObject = temp;

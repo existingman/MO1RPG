@@ -33,6 +33,6 @@ C:\Projects\MO1RPG\VSsolution\Common\bin\Debug\MO1Common.pdb
 C:\Projects\MO1RPG\VSsolution\Common\bin\Debug\Newtonsoft.Json.dll
 C:\Projects\MO1RPG\VSsolution\Common\bin\Debug\UnityEngine.dll
 C:\Projects\MO1RPG\VSsolution\Common\bin\Debug\UnityEngine.xml
-C:\Projects\MO1RPG\VSsolution\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
 C:\Projects\MO1RPG\VSsolution\Common\obj\Debug\MO1Common.dll
 C:\Projects\MO1RPG\VSsolution\Common\obj\Debug\MO1Common.pdb
+C:\Projects\MO1RPG\VSsolution\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache

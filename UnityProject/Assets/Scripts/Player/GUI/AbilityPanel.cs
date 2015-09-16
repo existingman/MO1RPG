@@ -17,6 +17,7 @@ namespace MO1.GUI
  
         public static void Initialise()
         {
+            Debug.Log("initialising ability pannel");
             MO1.PlayerCTR.PlayerCharactor.Inventory.SlotUpdate += EquipmentChanged;
             EquipmentChanged(MO1.Definitions.Items.EquipmentSlot.none);
             Draw();
@@ -47,6 +48,7 @@ namespace MO1.GUI
             Attack temp;
             foreach (Attack a in MO1.PlayerCTR.PlayerCharactor.Attacks())
             {
+                Debug.Log(a.Name);
                 x++;
                 temp = a;
                 var buttonObject = new GameObject( a.Name + " Btn");

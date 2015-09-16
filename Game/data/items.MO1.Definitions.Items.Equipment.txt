@@ -1,1 +1,0 @@
-[{"Attacks":[],"ImageRef":0,"stacks":1,"Slot":0,"MatName":"Copper","Name":"COpper Left Sabaton"}]

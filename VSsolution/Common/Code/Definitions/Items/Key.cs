@@ -7,7 +7,10 @@ namespace MO1.Definitions.Items
     {
         int KeyCode;
 
-
+        protected override string generateName()
+        {
+            return "Some Key";
+        }
 
 
 

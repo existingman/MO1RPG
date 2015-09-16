@@ -9,5 +9,10 @@ namespace MO1.Definitions.Items
         public float Amount { get; set; }
         public CurrencyType CurrencyType { get; set; }
 
+        protected override string generateName()
+        {
+            return Amount.ToString() + " " + CurrencyType.ToString();
+        }
+
     }
 }

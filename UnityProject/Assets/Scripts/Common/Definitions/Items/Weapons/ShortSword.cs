@@ -5,14 +5,25 @@ using MO1.Definitions.Combat;
 
 namespace MO1.Definitions.Items.Weapons
 {
-    class ShortSword: Weapon
+    public class ShortSword: Weapon
     {
-
-        public ShortSword()
+        public override List<Attack> Attacks
         {
-            Attacks.Add(new MeleeAttack(this, AttackName.Jab, DamageType.Piercing, 1f, 1f));
-            Attacks.Add(new MeleeAttack(this, AttackName.Slash, DamageType.Slashing, 1f, 1f));
+            get
+            {
+                List<Attack> temp = new List<Attack>();
+                temp.Add(new MeleeAttack(this, AttackName.Jab, DamageType.Piercing, 1f, 1f));
+                temp.Add(new MeleeAttack(this, AttackName.Slash, DamageType.Slashing, 1f, 1f));
+                return temp;
+            }
         }
+
+        public override WeaponType WeaponType
+        {
+            get { return WeaponType.ShortSword; }
+        }
+
+        
 
     }
 }

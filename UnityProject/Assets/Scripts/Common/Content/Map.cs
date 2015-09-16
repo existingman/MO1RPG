@@ -36,48 +36,49 @@ namespace MO1.Content
            }
         }
 
-        public static void Load(  )
+        public static void Load()
         {
-           string MapFile = Path.Combine(Data.BaseDir, "map.txt");
-           if (File.Exists(MapFile))
-           {
-               using (StreamReader sr = new StreamReader(MapFile))
-               {
-                   XSize = Convert.ToInt32(sr.ReadLine());
-                   YSize = Convert.ToInt32(sr.ReadLine());
-                   ZSize = Convert.ToInt32(sr.ReadLine());
-                   New(XSize, YSize, ZSize);
-                   for (int x = 0; x < XSize; x++)
-                   {
-                       for (int y = 0; y < YSize; y++)
-                       {
-                           for (int z = 0; z < ZSize; z++)
-                           {
-                               Tile[x, y, z].Coord = new Tech.Coord(x, y, z);
-                               Tile[x, y, z].TerrainRef = Convert.ToInt32(sr.ReadLine());
-                               Tile[x, y, z].PropRef = Convert.ToInt32(sr.ReadLine());
-                               //Tile[x, y, z].EntityRef = Convert.ToInt32(sr.ReadLine());
+            string MapFile = Path.Combine(Data.BaseDir, "map.txt");
+            if (File.Exists(MapFile))
+            {
+                using (StreamReader sr = new StreamReader(MapFile))
+                {
+                    XSize = Convert.ToInt32(sr.ReadLine());
+                    YSize = Convert.ToInt32(sr.ReadLine());
+                    ZSize = Convert.ToInt32(sr.ReadLine());
+                    New(XSize, YSize, ZSize);
+                    for (int x = 0; x < XSize; x++)
+                    {
+                        for (int y = 0; y < YSize; y++)
+                        {
+                            for (int z = 0; z < ZSize; z++)
+                            {
+                                Tile[x, y, z].Coord = new Tech.Coord(x, y, z);
+                                Tile[x, y, z].TerrainRef = Convert.ToInt32(sr.ReadLine());
+                                Tile[x, y, z].PropRef = Convert.ToInt32(sr.ReadLine());
+                                //Tile[x, y, z].EntityRef = Convert.ToInt32(sr.ReadLine());
 
-                               Tile[x, y, z].LineOfSight = Convert.ToBoolean(sr.ReadLine());
-                               Tile[x, y, z].Discovered = Convert.ToBoolean(sr.ReadLine());
-                               Tile[x, y, z].Traversed = Convert.ToBoolean(sr.ReadLine());
+                                Tile[x, y, z].LineOfSight = Convert.ToBoolean(sr.ReadLine());
+                                Tile[x, y, z].Discovered = Convert.ToBoolean(sr.ReadLine());
+                                Tile[x, y, z].Traversed = Convert.ToBoolean(sr.ReadLine());
 
-                               if (Tile[x, y, z].PropRef != -1)
-                               {
-                                   Tile[x, y, z].DoorState = (DoorState)Convert.ToInt32(sr.ReadLine());
-                                   Tile[x, y, z].KeyRef = Convert.ToInt32(sr.ReadLine());
-                                   Tile[x, y, z].ActionRef = Convert.ToInt32(sr.ReadLine());
-                               }
-                           }
-                       }
-                   }
-               }
-           }
+                                if (Tile[x, y, z].PropRef != -1)
+                                {
+                                    Tile[x, y, z].DoorState = (DoorState)Convert.ToInt32(sr.ReadLine());
+                                    Tile[x, y, z].KeyRef = Convert.ToInt32(sr.ReadLine());
+                                    Tile[x, y, z].ActionRef = Convert.ToInt32(sr.ReadLine());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             else
-           {
-               New(50, 50, 5);
-           }
+            {
+                New(50, 50, 5);
+            }
 
+            /*
            string tempJson;
            var entityFiles = Directory.GetFiles(Data.BaseDir, "entities.*");
            foreach (var entityFile in entityFiles)
@@ -102,7 +103,27 @@ namespace MO1.Content
                    Map.Get(e.Coord).Entity = e;
                }
            }
+             * */
+            string filename = Path.Combine(Data.BaseDir, "entities.txt");
+            if (File.Exists(filename))
+            {
+                string tempJson = System.IO.File.ReadAllText(filename);
 
+#if UNITY_EDITOR
+                // replace assembly names 
+                    tempJson = tempJson.Replace("MO1Common", "Assembly-CSharp");
+#endif
+                var settings = new JsonSerializerSettings()
+                {
+                    TypeNameHandling = TypeNameHandling.Objects
+                };
+                IList parsedEntities = (IList)JsonConvert.DeserializeObject<List<Entity>>(tempJson, settings);
+                foreach (Entity e in parsedEntities)
+                {
+                    //e.Initialise();
+                    Map.Get(e.Coord).Entity = e;
+                }
+            }
         }
 
         public static void Save()
@@ -149,6 +170,8 @@ namespace MO1.Content
                     }
                 }
             }
+
+            /*
             string tempJson;
             string filename;
             var entitiesGroupedByType = Entities.GroupBy(i => i.GetType()).ToList();
@@ -158,6 +181,14 @@ namespace MO1.Content
                 tempJson = JsonConvert.SerializeObject(entityTypeGroup.ToArray());
                 System.IO.File.WriteAllText(filename, tempJson);
             }
+             * */
+            string filename = Path.Combine(Data.BaseDir, "entities.txt");
+            var settings = new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.Objects
+            };
+            string tempJson = JsonConvert.SerializeObject(Entities, settings);
+            System.IO.File.WriteAllText(filename, tempJson);
 
         }
 
